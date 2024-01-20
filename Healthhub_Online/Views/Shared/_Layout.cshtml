@@ -6,34 +6,72 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/fullcalendarcss")
+    <link href="~/Common/css/StyleMenu.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="~/Common/Icon/css/all.css" rel="stylesheet" />
 </head>
-<body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+<body style="color:black">
+    @using Healthhub_Online.Models
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#4267B2">
         <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li> <img src="~/Common/images/YTE.jpg" width="100" height="50" alt=""></li>
+                    <li>@Html.ActionLink(" TRANG CHỦ ", "Index", "Home", null, new { @class = "MauchuMenu" })</li>
+                    @*<li>@Html.ActionLink(" TIN TỨC COVID ", "listAll", "Hoidap", null, new { @class = "MauchuMenu" })</li>*@
+                    <li>@Html.ActionLink(" HỎI ĐÁP ONILNE", null, new { @class = "MauchuMenu" })</li>
+                    <li>@Html.ActionLink(" TRUNG TÂM Y TẾ", "Index", null, new { @class = "MauchuMenu" })</li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li> @Html.ActionLink("ĐĂNG KÝ", null, new { @class = "MauchuMenu" }) </li>
+                    <li> @Html.ActionLink("ĐĂNG NHẬP", null, new { @class = "MauchuMenu" })</li>
                 </ul>
             </div>
         </div>
-    </nav>
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+    <hr />
+    <footer class="bg-info">
+        <div class="row">
+            <div class="col-md-12 col-sm-6">
+                <CENTER>
+                    <div style="align-content:center">
+                        <h3>TRANG TIN VỀ DỊCH BỆNH COVID-19</h3>
+                        <br />
+
+                        Thiết kế bởi : Group3_SWP391_SE1758
+                        <br />
+                        FPT University
+                        <br />
+                        Email: phamduycuong2k1@gmail.com
+
+
+                    </div>
+                </CENTER>
+            </div>
+        </div>
+        <hr />
+        <center> <p class="bg-primary">&copy; @DateTime.Now.Year - Group3_SWP391_SE1758</p></center>
+    </footer>
+
+               
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/fullcalendarjs")
     @RenderSection("scripts", required: false)
 </body>
 </html>
