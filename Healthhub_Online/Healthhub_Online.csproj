@@ -1129,8 +1129,8 @@
     <Content Include="Common\Icon\webfonts\fa-solid-900.svg" />
     <Content Include="Common\images\bannerbs.jpg" />
     <Content Include="Common\images\bs.jpg" />
+    <Content Include="Common\images\logo.png" />
     <Content Include="Common\images\map.jpg" />
-    <Content Include="Common\images\YTE.jpg" />
     <Content Include="Common\images\zoom.png" />
     <Content Include="Common\js\StyleMenu.js" />
     <Content Include="Common\layoutAdmin\css\styles.css" />
