@@ -22,7 +22,7 @@ namespace Healthhub_Online.Controllers
 
         public ActionResult Dangky()
         {
-            ViewBag.Message = "Your page jnkjkjbkhggkugiugiu.";
+            ViewBag.Message = "Your contact page.";iigigiiuuiu
 
             return View();
         }
