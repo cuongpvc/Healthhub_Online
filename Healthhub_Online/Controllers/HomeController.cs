@@ -13,14 +13,14 @@ namespace Healthhub_Online.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Trangchu()
         {
-            ViewBag.Message = "Your application description page.";
+            
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Dangky()
         {
             ViewBag.Message = "Your contact page.";iigigiiuuiu
 
