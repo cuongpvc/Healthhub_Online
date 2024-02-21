@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="da15bbcbe955461fa4e90716d12876b6" Name="Diagram1">
+        <EntityTypeShape EntityType="WebAppYteModel.BenhAn" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppYteModel.GioiTinh" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppYteModel.HoiDap" Width="1.5" PointX="8.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppYteModel.Khoa" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppYteModel.LichKham" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppYteModel.NguoiDung" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppYteModel.QuanTri" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppYteModel.Solieucovid" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppYteModel.sysdiagram" Width="1.5" PointX="9.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppYteModel.TinhThanh" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppYteModel.Tintuc" Width="1.5" PointX="10.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAppYteModel.TrungTamGanNhat" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <AssociationConnector Association="WebAppYteModel.FK_BenhAn_LichKham" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppYteModel.FK_BenhAn_NguoiDung" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppYteModel.FK_NguoiDung_GioiTinh" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppYteModel.FK_HoiDap_NguoiDung" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppYteModel.FK_HoiDap_QuanTri" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppYteModel.FK_QuanTri_Khoa" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppYteModel.FK_LichKham_NguoiDung" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppYteModel.FK_LichKham_QuanTri" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppYteModel.FK_NguoiDung_TinhThanh" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAppYteModel.FK_TrungTamGanNhat_TinhThanh" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
