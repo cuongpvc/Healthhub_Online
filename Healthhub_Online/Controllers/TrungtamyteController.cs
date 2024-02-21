@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Healthhub_Online.Models;
 
-namespace WebAppYte.Controllers
+namespace Healthhub_Online.Controllers
 {
     public class TrungtamyteController : Controller
     {
