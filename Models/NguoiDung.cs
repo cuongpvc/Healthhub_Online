@@ -49,7 +49,7 @@ namespace Healthhub_Online.Models
         public Nullable<int> IDTinh { get; set; }   //validation
 
         [Required(ErrorMessage = "Cần nhập nhóm máu")]
-        [RegularExpression(@"^(A|B|AB|O)[+-]$", ErrorMessage = "Nhóm máu không phù hợp")]
+        [RegularExpression(@"^(A|B|AB|O)", ErrorMessage = "Nhóm máu không phù hợp")]
         public string NhomMau { get; set; }     //validation
         public string ThongTinKhac { get; set; }
 

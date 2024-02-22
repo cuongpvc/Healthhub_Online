@@ -61,6 +61,24 @@ namespace WebAppYte.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IDNguoiDung,HoTen,Email,DienThoai,TaiKhoan,MatKhau,IDGioiTinh,DiaChiCuThe,SoCMND,IDTinh,NhomMau,ThongTinKhac")] NguoiDung nguoiDung)
         {
+            bool usernameExists = db.NguoiDungs.Any(u => u.TaiKhoan == nguoiDung.TaiKhoan);
+            if (usernameExists)
+            {
+                ModelState.AddModelError("TaiKhoan", "Tài Khoản đã tồn tại");
+            }
+
+            bool phoneExists = db.NguoiDungs.Any(u => u.DienThoai == nguoiDung.DienThoai);
+            if (phoneExists)
+            {
+                ModelState.AddModelError("DienThoai", "Số điện thoại đã được đăng ký");
+            }
+
+            bool emailExists = db.NguoiDungs.Any(u => u.Email == nguoiDung.Email);
+            if (emailExists)
+            {
+                ModelState.AddModelError("Email", "Email đã được đăng ký");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(nguoiDung).State = EntityState.Modified;
