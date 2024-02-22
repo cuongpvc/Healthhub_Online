@@ -111,3 +111,8 @@ C:\Users\qhuyt\source\repos\Healthhub_Online\Healthhub_Online\obj\Debug\Healthhu
 C:\Users\qhuyt\source\repos\Healthhub_Online\Healthhub_Online\obj\Debug\Healthhub_Online.csproj.CopyComplete
 C:\Users\qhuyt\source\repos\Healthhub_Online\Healthhub_Online\obj\Debug\Healthhub_Online.dll
 C:\Users\qhuyt\source\repos\Healthhub_Online\Healthhub_Online\obj\Debug\Healthhub_Online.pdb
+C:\Users\qhuyt\source\repos\Healthhub_Online\Healthhub_Online\bin\nunit.framework.dll
+C:\Users\qhuyt\source\repos\Healthhub_Online\Healthhub_Online\bin\nunit.framework.legacy.dll
+C:\Users\qhuyt\source\repos\Healthhub_Online\Healthhub_Online\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\qhuyt\source\repos\Healthhub_Online\Healthhub_Online\bin\nunit.framework.xml
+C:\Users\qhuyt\source\repos\Healthhub_Online\Healthhub_Online\bin\nunit.framework.legacy.xml
