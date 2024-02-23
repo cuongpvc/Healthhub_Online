@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
-
 namespace Healthhub_Online.Models
 {
     public partial class modelWeb : DbContext

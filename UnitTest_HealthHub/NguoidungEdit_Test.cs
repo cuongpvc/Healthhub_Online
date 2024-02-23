@@ -3,6 +3,7 @@ using Healthhub_Online.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Healthhub_Online.Models;
 
 namespace Healthhub_Online.Tests.Models
 {

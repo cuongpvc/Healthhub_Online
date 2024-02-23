@@ -5,7 +5,6 @@ namespace Healthhub_Online.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-
     [Table("LichKham")]
     public partial class LichKham
     {
