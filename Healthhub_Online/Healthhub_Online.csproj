@@ -52,6 +52,12 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -1352,6 +1358,15 @@
     <Content Include="Views\Lichkham\Index.cshtml" />
     <Content Include="Views\Nguoidung\Index.cshtml" />
     <Content Include="Views\Trungtamyte\Index.cshtml" />
+    <Content Include="Views\Lichkham\Create.cshtml" />
+    <Content Include="Views\Lichkham\Dangxuly.cshtml" />
+    <Content Include="Views\Lichkham\Datuvanxong.cshtml" />
+    <Content Include="Views\Lichkham\Daxacnhan.cshtml" />
+    <Content Include="Views\Lichkham\Delete.cshtml" />
+    <Content Include="Views\Lichkham\Details.cshtml" />
+    <Content Include="Views\Lichkham\Edit.cshtml" />
+    <Content Include="Views\Lichkham\Lichdangluoi.cshtml" />
+    <Content Include="Views\Lichkham\Lichhen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1360,6 +1375,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
