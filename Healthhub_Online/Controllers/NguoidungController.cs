@@ -12,7 +12,7 @@ namespace Healthhub_Online.Controllers
 {
     public class NguoidungController : Controller
     {
-        private modelWeb db = new modelWeb();
+        private ModelWeb db = new ModelWeb();
 
 
         // GET: Nguoidung

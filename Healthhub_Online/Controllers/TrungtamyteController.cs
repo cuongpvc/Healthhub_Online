@@ -11,7 +11,7 @@ namespace Healthhub_Online.Controllers
 {
     public class TrungtamyteController : Controller
     {
-        modelWeb db = new modelWeb();
+        ModelWeb db = new ModelWeb();
         [HttpGet]
         public ActionResult Index()
         {

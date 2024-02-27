@@ -11,7 +11,7 @@ namespace Healthhub_Online.Controllers
 {
     public class BacsiController : Controller
     {
-        private modelWeb db = new modelWeb();
+        private ModelWeb db = new ModelWeb();
 
         // GET: Bacsi
         public ActionResult Index()
