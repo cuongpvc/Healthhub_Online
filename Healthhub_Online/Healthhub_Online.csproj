@@ -88,8 +88,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -161,6 +161,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BenhAn.cs" />
+    <Compile Include="Models\GioiTinh.cs" />
+    <Compile Include="Models\HoiDap.cs" />
+    <Compile Include="Models\Khoa.cs" />
+    <Compile Include="Models\LichKham.cs" />
+    <Compile Include="Models\ModelWeb.cs" />
+    <Compile Include="Models\NguoiDung.cs" />
+    <Compile Include="Models\QuanTri.cs" />
+    <Compile Include="Models\Solieucovid.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
+    <Compile Include="Models\TinhThanh.cs" />
+    <Compile Include="Models\Tintuc.cs" />
+    <Compile Include="Models\TrungTamGanNhat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
