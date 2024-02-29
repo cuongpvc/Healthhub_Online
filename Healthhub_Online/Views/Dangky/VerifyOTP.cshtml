@@ -1,0 +1,30 @@
+﻿@model Healthhub_Online.Models.NguoiDung
+@{
+    ViewBag.Title = "Xách thực OTP";
+}
+
+<h2>Xác thực OTP</h2>
+
+@using (Html.BeginForm("VerifyOTP", "Dangky", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.Label("OTP", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("otp", null, new { @class = "form-control" })
+                @Html.ValidationMessage("otp", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Verify OTP" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
