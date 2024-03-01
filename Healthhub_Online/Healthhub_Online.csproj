@@ -163,19 +163,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BenhAn.cs" />
-    <Compile Include="Models\GioiTinh.cs" />
-    <Compile Include="Models\HoiDap.cs" />
-    <Compile Include="Models\Khoa.cs" />
-    <Compile Include="Models\LichKham.cs" />
-    <Compile Include="Models\ModelWeb.cs" />
-    <Compile Include="Models\NguoiDung.cs" />
-    <Compile Include="Models\QuanTri.cs" />
-    <Compile Include="Models\Solieucovid.cs" />
-    <Compile Include="Models\sysdiagram.cs" />
-    <Compile Include="Models\TinhThanh.cs" />
-    <Compile Include="Models\Tintuc.cs" />
-    <Compile Include="Models\TrungTamGanNhat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
