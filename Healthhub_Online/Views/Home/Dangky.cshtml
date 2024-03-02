@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Register</h2>
+<h2>Đăng Ký</h2>
 
 @using (Html.BeginForm("Dangky", "Dangky", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -79,6 +79,11 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Register" class="btn btn-default" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            Bạn đã có tài khoản? <a href="@Url.Action("DangNhap", "Home")">Đăng Nhập ngay</a>.
         </div>
     </div>
 }
