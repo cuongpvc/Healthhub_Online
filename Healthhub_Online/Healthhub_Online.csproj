@@ -1383,6 +1383,9 @@
     <Content Include="Views\Dangky\VerifyOTP.cshtml" />
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Lichkham\Create.cshtml" />
+    <Content Include="Views\Lichkham\Details.cshtml" />
+    <Content Include="Views\Lichkham\Edit.cshtml" />
+    <Content Include="Views\Lichkham\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
