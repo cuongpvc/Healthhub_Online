@@ -93,22 +93,30 @@ namespace Healthhub_Online.Controllers
         [HttpPost]
         public ActionResult VerifyOTP(int otp)
         {
-            int storedOTP = Convert.ToInt32(TempData["OTP"]);
-            if (otp == storedOTP)
+            try
             {
-                ViewBag.Message = "OTP xác thực thành công";
-                NguoiDung nguoiDung = TempData["NguoiDung"] as NguoiDung;
-                db.NguoiDungs.Add(nguoiDung);
-                db.SaveChanges();
-                return RedirectToAction("Dangnhap", "Home");
-            }
-            else
+                int storedOTP = Convert.ToInt32(TempData["OTP"]);
+                if (otp == storedOTP)
+                {
+                    ViewBag.Message = "OTP xác thực thành công";
+                    NguoiDung nguoiDung = TempData["NguoiDung"] as NguoiDung;
+                    db.NguoiDungs.Add(nguoiDung);
+                    db.SaveChanges();
+                    return RedirectToAction("Dangnhap", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("otp", "Mã OTP không đúng vui lòng thử lại");
+                    return View();
+                }
+            }catch(Exception e)
             {
-                ModelState.AddModelError("otp", "Mã OTP không đúng vui lòng thử lại");
-                return RedirectToAction("VerifyOTP", "Home");
+                ModelState.AddModelError("otp", "Mã OTP Không hợp lệ !");
+                return View();
+
             }
 
-            return View();
+           
         }
 
         private bool SendOTP(string email, int otp)
