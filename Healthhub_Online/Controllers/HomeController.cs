@@ -109,7 +109,7 @@ namespace Healthhub_Online.Controllers
                     ModelState.AddModelError("otp", "Mã OTP không đúng vui lòng thử lại");
                     return View();
                 }
-            }catch(Exception e)
+            }catch (Exception)
             {
                 ModelState.AddModelError("otp", "Mã OTP Không hợp lệ !");
                 return View();
