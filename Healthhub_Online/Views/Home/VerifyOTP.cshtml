@@ -36,7 +36,7 @@
             $('#verifyButton').click(function () {
                 var otp = $('#otpInput').val();
                 if (!otp || !/^\d+$/.test(otp)) {
-                    $('#otpError').text('OTP must be a numeric value');
+                    $('#otpError').text('OTP không hợp lệ !');
                     return;
                 }
 
