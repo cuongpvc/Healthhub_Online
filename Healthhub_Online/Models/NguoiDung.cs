@@ -42,8 +42,11 @@
         [Required(ErrorMessage = "Cần nhập mật khẩu")]
         public string MatKhau { get; set; }
 
+
         [Display(Name = "Giới tính")]
         public int? IDGioiTinh { get; set; }
+
+
         [Display(Name = "Địa chỉ cụ thể")]
         public string DiaChiCuThe { get; set; }
         [Display(Name = "Số chứng minh nhân dân")]
@@ -53,8 +56,7 @@
         [Display(Name = "Nhóm máu")]
         [StringLength(2)]
 
-        [Required(ErrorMessage = "Cần nhập nhóm máu")]
-        [RegularExpression(@"^(A|B|AB|O)[+-]$", ErrorMessage = "Nhóm máu không phù hợp")]
+        [RegularExpression(@"^(A|B|AB|O)[\+-]$", ErrorMessage = "Nhóm máu không phù hợp")]
         public string NhomMau { get; set; }     //validation
         public string ThongTinKhac { get; set; }
 
@@ -72,4 +74,5 @@
 
         public virtual TinhThanh TinhThanh { get; set; }
     }
+
 }

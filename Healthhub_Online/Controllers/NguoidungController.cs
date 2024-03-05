@@ -37,6 +37,7 @@ namespace Healthhub_Online.Controllers
             return View(nguoiDung);
         }
 
+
         // GET: Nguoidung/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -84,8 +85,8 @@ namespace Healthhub_Online.Controllers
                 db.SaveChanges();
                 ViewBag.capnhat = " Cập nhật thành công ";
             }
-            //ViewBag.IDGioiTinh = new SelectList(db.GioiTinhs, "IDGioiTinh", "GioiTinh1", nguoiDung.IDGioiTinh);
-           // ViewBag.IDTinh = new SelectList(db.TinhThanhs, "IDTinh", "TenTinh", nguoiDung.IDTinh);
+            ViewBag.IDGioiTinh = new SelectList(db.GioiTinhs, "IDGioiTinh", "GioiTinh1", nguoiDung.IDGioiTinh);
+            ViewBag.IDTinh = new SelectList(db.TinhThanhs, "IDTinh", "TenTinh", nguoiDung.IDTinh);
             return View(nguoiDung);
         }
         protected override void Dispose(bool disposing)
