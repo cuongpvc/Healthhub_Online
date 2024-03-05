@@ -5,7 +5,6 @@ namespace Healthhub_Online.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using Healthhub_Online.Models;
 
     [Table("BenhAn")]
     public partial class BenhAn

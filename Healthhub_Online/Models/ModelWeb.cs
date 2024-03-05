@@ -2,11 +2,15 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
+
 namespace Healthhub_Online.Models
 {
-    public partial class modelWeb : DbContext
+    public partial class ModelWeb : DbContext
     {
-
+        public ModelWeb()
+            : base("name=ModelWeb")
+        {
+        }
 
         public virtual DbSet<BenhAn> BenhAns { get; set; }
         public virtual DbSet<GioiTinh> GioiTinhs { get; set; }
