@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
@@ -101,6 +104,9 @@ namespace Healthhub_Online.Controllers
                 {
                     ViewBag.Message = "OTP xác thực thành công";
                     NguoiDung nguoiDung = TempData["NguoiDung"] as NguoiDung;
+                    nguoiDung.DienThoai = nguoiDung.DienThoai.Trim();
+                    nguoiDung.TaiKhoan = nguoiDung.TaiKhoan.Trim();
+
                     db.NguoiDungs.Add(nguoiDung);
                     db.SaveChanges();
                     return RedirectToAction("Dangnhap", "Home");
@@ -296,17 +302,34 @@ namespace Healthhub_Online.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Datlaimatkhau(string password, string confirmPassword)
         {
-            int userId = Convert.ToInt32(TempData["UserID"]);
-            var user = db.NguoiDungs.Find(userId);
-
-            if (password != confirmPassword)
+            try
             {
-                ModelState.AddModelError("confirmPassword", "Mật khẩu xác nhận không khớp.");
-                return View();
-            }
+                int userId = Convert.ToInt32(TempData["UserID"]);
+                var user = db.NguoiDungs.FirstOrDefault(x => x.IDNguoiDung == userId);
 
-            user.MatKhau = password;
-            db.SaveChanges();
+                if (password != confirmPassword)
+                {
+                    ModelState.AddModelError("confirmPassword", "Mật khẩu xác nhận không khớp.");
+                    return View();
+                }
+
+                user.MatKhau = password;
+                user.DienThoai=user.DienThoai.Trim();
+                user.TaiKhoan = user.TaiKhoan.Trim();
+                db.SaveChanges();
+                ViewBag.Message = "Đặt lại mật khẩu thành công.";
+                return RedirectToAction("Dangnhap", "Home");
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Debug.WriteLine("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                    }
+                }
+            }
             ViewBag.Message = "Đặt lại mật khẩu thành công.";
             return RedirectToAction("Dangnhap", "Home");
         }
