@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Healthhub_Online.Models;
+using static System.Net.WebRequestMethods;
 
 namespace Healthhub_Online.Controllers
 {
@@ -158,8 +159,7 @@ namespace Healthhub_Online.Controllers
             // Xóa session người dùng khi đăng xuất
             Session["user"] = null;
             Session["userBS"] = null;
-
-            // Chuyển hướng về trang đăng nhập
+            Session["admin"] = null;
             return RedirectToAction("Index", "Home");
         }
 
@@ -197,5 +197,120 @@ namespace Healthhub_Online.Controllers
                 return View();
             }
         }
+        public ActionResult Quenmatkhau()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Quenmatkhau(string email)
+        {
+            var user = db.NguoiDungs.FirstOrDefault(u => u.Email == email);
+            if (user == null)
+            {
+                ModelState.AddModelError("email", "Email không tồn tại trong hệ thống.");
+                return View();
+            }
+
+            // Gửi OTP đến email của người dùng
+            Random random = new Random();
+            int otp = random.Next(100000, 999999);
+            if (SendOTPForgotPass(email, otp))
+            {
+                TempData["OTP"] = otp;
+                TempData["UserID"] = user.IDNguoiDung;
+                return RedirectToAction("VerifyOTPForgotPassword");
+            }
+
+            return View();
+        }
+        public ActionResult VerifyOTPForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult VerifyOTPForgotPassword(int otp)
+        {
+            try
+            {
+                int storedOTP = Convert.ToInt32(TempData["OTP"]);
+                if (otp == storedOTP)
+                {
+                    ViewBag.Message = "OTP xác thực thành công";
+                    TempData["UserID"] = TempData["UserID"];
+
+                    return RedirectToAction("Datlaimatkhau");
+                }
+                else
+                {
+                    ModelState.AddModelError("otp", "Mã OTP không đúng vui lòng thử lại");
+                    return View();
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("otp", "Mã OTP Không hợp lệ !");
+                return View();
+
+            }
+        }
+
+        private bool SendOTPForgotPass(string email, int otp)
+        {
+            try
+            {
+                // Configure SMTP client
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587); // Update with your SMTP server details
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential("haizaki505@gmail.com", "dnwhqnezsnhqpgmg"); // Update with your email credentials
+                smtpClient.EnableSsl = true;
+
+                // Compose email message
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("haizaki505@gmail.com"); // Update with your email address
+                mailMessage.To.Add(email);
+                mailMessage.Subject = "Mã OTP để đặt lại mật khẩu";
+                mailMessage.Body = "Mã OTP của bạn là: " + otp.ToString();
+
+                // Send email
+                smtpClient.Send(mailMessage);
+                return true;
+            }
+
+
+            catch (Exception ex)
+            {
+                // Failed to send email
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public ActionResult Datlaimatkhau()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Datlaimatkhau(string password, string confirmPassword)
+        {
+            int userId = Convert.ToInt32(TempData["UserID"]);
+            var user = db.NguoiDungs.Find(userId);
+
+            if (password != confirmPassword)
+            {
+                ModelState.AddModelError("confirmPassword", "Mật khẩu xác nhận không khớp.");
+                return View();
+            }
+
+            user.MatKhau = password;
+            db.SaveChanges();
+            ViewBag.Message = "Đặt lại mật khẩu thành công.";
+            return RedirectToAction("Dangnhap", "Home");
+        }
     }
+   
+
 } 
