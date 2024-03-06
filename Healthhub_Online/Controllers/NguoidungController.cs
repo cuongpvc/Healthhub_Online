@@ -19,7 +19,6 @@ namespace Healthhub_Online.Controllers
         public ActionResult Index()
         {
             var nguoiDungs = db.NguoiDungs.Include(n => n.GioiTinh).Include(n => n.TinhThanh);
-
             return View(nguoiDungs.ToList());
         }
 
@@ -37,6 +36,7 @@ namespace Healthhub_Online.Controllers
             }
             return View(nguoiDung);
         }
+
 
         // GET: Nguoidung/Edit/5
         public ActionResult Edit(int? id)
