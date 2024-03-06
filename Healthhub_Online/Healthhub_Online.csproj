@@ -153,8 +153,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BacsiController.cs" />
-    <Compile Include="Controllers\DangkyController.cs" />
-    <Compile Include="Controllers\DangnhapController.cs" />
     <Compile Include="Controllers\HoidapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LichkhamController.cs" />
