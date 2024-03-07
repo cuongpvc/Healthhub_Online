@@ -1376,9 +1376,9 @@
     <Content Include="Views\Lichkham\Index.cshtml" />
     <Content Include="Views\Nguoidung\Index.cshtml" />
     <Content Include="Views\Trungtamyte\Index.cshtml" />
-    <Content Include="Views\Dangnhap\Dangnhap.cshtml" />
-    <Content Include="Views\Dangky\Dangky.cshtml" />
-    <Content Include="Views\Dangky\VerifyOTP.cshtml" />
+    <Content Include="Views\Home\Dangnhap.cshtml" />
+    <Content Include="Views\Home\Dangky.cshtml" />
+    <Content Include="Views\Home\VerifyOTP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
