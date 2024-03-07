@@ -56,7 +56,6 @@
         [Display(Name = "Nhóm máu")]
         [StringLength(2)]
 
-        [RegularExpression(@"^(A|B|AB|O)[\+-]$", ErrorMessage = "Nhóm máu không phù hợp")]
         public string NhomMau { get; set; }     //validation
         public string ThongTinKhac { get; set; }
 
