@@ -24,6 +24,33 @@ namespace Healthhub_Online.Controllers
             ViewBag.id = id;
             return View(lichKhams.ToPagedList(pageNumber, pageSize));
         }
+        public ActionResult Dangxuly(int? id, int? page)
+        {
+            var lichKhams = db.LichKhams.Include(l => l.NguoiDung).Include(l => l.QuanTri).
+                Where(h => h.IDNguoiDung == id && h.TrangThai == 0).OrderByDescending(x => x.BatDau).ThenBy(x => x.IDLichKham);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            ViewBag.id = id;
+            return View(lichKhams.ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult Daxacnhan(int? id, int? page)
+        {
+            var lichKhams = db.LichKhams.Include(l => l.NguoiDung).Include(l => l.QuanTri).
+                Where(h => h.IDNguoiDung == id && h.TrangThai == 1).OrderByDescending(x => x.BatDau).ThenBy(x => x.IDLichKham);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            ViewBag.id = id;
+            return View(lichKhams.ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult Datuvanxong(int? id, int? page)
+        {
+            var lichKhams = db.LichKhams.Include(l => l.NguoiDung).Include(l => l.QuanTri).
+                Where(h => h.IDNguoiDung == id && h.TrangThai == 2).OrderByDescending(x => x.BatDau).ThenBy(x => x.IDLichKham);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            ViewBag.id = id;
+            return View(lichKhams.ToPagedList(pageNumber, pageSize));
+        }
         // GET: Lichkham/Details/5
         public ActionResult Details(int? id)
         {

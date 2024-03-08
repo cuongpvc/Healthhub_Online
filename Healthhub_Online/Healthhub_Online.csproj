@@ -1386,6 +1386,11 @@
     <Content Include="Views\Lichkham\Details.cshtml" />
     <Content Include="Views\Lichkham\Edit.cshtml" />
     <Content Include="Views\Lichkham\Delete.cshtml" />
+    <Content Include="Views\Lichkham\Dangxuly.cshtml" />
+    <Content Include="Views\Lichkham\Daxacnhan.cshtml" />
+    <Content Include="Views\Lichkham\Datuvanxong.cshtml" />
+    <Content Include="Views\Lichkham\Lichdangluoi.cshtml" />
+    <Content Include="Views\Lichkham\lichhen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
