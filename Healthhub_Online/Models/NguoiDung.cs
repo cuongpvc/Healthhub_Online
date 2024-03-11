@@ -1,9 +1,7 @@
 ﻿namespace Healthhub_Online.Models
 {
-    using Healthhub_Online.Models;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -15,6 +13,7 @@
         public NguoiDung()
         {
             BenhAns = new HashSet<BenhAn>();
+            DanhGias = new HashSet<DanhGia>();
             HoiDaps = new HashSet<HoiDap>();
             LichKhams = new HashSet<LichKham>();
         }
@@ -24,7 +23,7 @@
 
         [Required(ErrorMessage = "Cần nhập họ tên")]
         public string HoTen { get; set; }
-  
+
 
         [Required(ErrorMessage = "Cần nhập Email")]
         [EmailAddress(ErrorMessage = "Email không phù hợp")]
@@ -72,6 +71,11 @@
         public virtual ICollection<LichKham> LichKhams { get; set; }
 
         public virtual TinhThanh TinhThanh { get; set; }
-    }
+        public string AnhDaiDien { get; set; }
 
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DanhGia> DanhGias { get; set; }
+
+    }
 }
