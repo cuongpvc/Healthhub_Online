@@ -15,6 +15,7 @@
         public NguoiDung()
         {
             BenhAns = new HashSet<BenhAn>();
+            DanhGias = new HashSet<DanhGia>();
             HoiDaps = new HashSet<HoiDap>();
             LichKhams = new HashSet<LichKham>();
         }
@@ -62,6 +63,9 @@
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BenhAn> BenhAns { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DanhGia> DanhGias { get; set; }
 
         public virtual GioiTinh GioiTinh { get; set; }
 
