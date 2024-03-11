@@ -84,8 +84,11 @@
                 else if (@item.TrangThai == 2)
                 {
                     <h5 style="color:red"> Đã tư vấn xong. </h5>
-                    //<h4>Kết thúc lúc: @item.KetThuc.Value.ToString("dd/MM/yyyy HH:mm:ss")</h4>
+                    <h4>Kết thúc lúc: @item.KetThuc.Value.ToString("dd/MM/yyyy HH:mm:ss")</h4>
                     <h4>Ghi chú tư vấn : @item.KetQuaKham</h4>
+                    <button class="btn-success">
+                        <b>@Html.ActionLink("Đánh giá", "DanhGia")</b>
+                    </button>
                     <hr />
 
                 }

@@ -51,6 +51,35 @@ namespace Healthhub_Online.Controllers
             ViewBag.id = id;
             return View(lichKhams.ToPagedList(pageNumber, pageSize));
         }
+        
+        public ActionResult DanhGia()
+        {
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen");
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris.Where(n => n.VaiTro == 2), "IDQuanTri", "HoTen");
+            ViewBag.IDDanhGiaChatLuong = new SelectList(db.DanhGiaChatLuongs, "IDDanhGiaChatLuong", "DanhGiaChatLuong1");
+            return View();
+            
+        }
+        // POST: Lichkham/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DanhGia([Bind(Include = "IDDanhGia,NoiDung,IDDanhGiaChatLuong,IDNguoiDung,IDQuanTri")] DanhGia danhGia)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                db.DanhGias.Add(danhGia);
+                db.SaveChanges();
+                return RedirectToAction("Datuvanxong", "LichKham", new { id = danhGia.IDNguoiDung });
+            }
+
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", danhGia.IDNguoiDung);
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "HoTen", danhGia.IDQuanTri);
+            ViewBag.IDDanhGiaChatLuong = new SelectList(db.DanhGiaChatLuongs, "IDDanhGiaChatLuong", "DanhGiaChatLuong1", danhGia.IDDanhGiaChatLuong);
+            return View(danhGia);
+        }
         // GET: Lichkham/Details/5
         public ActionResult Details(int? id)
         {

@@ -164,6 +164,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BenhAn.cs" />
+    <Compile Include="Models\DanhGia.cs" />
+    <Compile Include="Models\DanhGiaChatLuong.cs" />
     <Compile Include="Models\GioiTinh.cs" />
     <Compile Include="Models\HoiDap.cs" />
     <Compile Include="Models\Khoa.cs" />
@@ -172,7 +174,6 @@
     <Compile Include="Models\NguoiDung.cs" />
     <Compile Include="Models\QuanTri.cs" />
     <Compile Include="Models\Solieucovid.cs" />
-    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\TinhThanh.cs" />
     <Compile Include="Models\Tintuc.cs" />
     <Compile Include="Models\TrungTamGanNhat.cs" />
@@ -1373,7 +1374,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Bacsi\Index.cshtml" />
     <Content Include="Views\Hoidap\Index.cshtml" />
     <Content Include="Views\Lichkham\Index.cshtml" />
     <Content Include="Views\Nguoidung\Index.cshtml" />
@@ -1391,6 +1391,15 @@
     <Content Include="Views\Lichkham\Datuvanxong.cshtml" />
     <Content Include="Views\Lichkham\Lichdangluoi.cshtml" />
     <Content Include="Views\Lichkham\lichhen.cshtml" />
+    <Content Include="Views\Bacsi\Kiemtralichhen.cshtml" />
+    <Content Include="Views\Bacsi\Lichdangcho.cshtml" />
+    <Content Include="Views\Bacsi\Lichdaxacnhan.cshtml" />
+    <Content Include="Views\Bacsi\Xacnhanlichhen.cshtml" />
+    <Content Include="Views\Bacsi\Details.cshtml" />
+    <Content Include="Views\Bacsi\Edit.cshtml" />
+    <Content Include="Views\Bacsi\Index.cshtml" />
+    <Content Include="Views\Lichkham\DanhGia.cshtml" />
+    <Content Include="Views\Bacsi\KiemTraDanhGia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
