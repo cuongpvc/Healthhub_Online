@@ -43,7 +43,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.TaiKhoan, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.TaiKhoan, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.TextBoxFor(model => model.TaiKhoan, new { @class = "form-control", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -51,7 +51,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.MatKhau, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control" } })
+            <input class="form-control" type="password" id="MatKhau" name="MatKhau" readonly value="@Model.MatKhau" />
+            <span onclick="togglePasswordVisibility()" style="cursor: pointer;">Hiện/Ẩn</span>
             @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -116,3 +117,13 @@
 <div>
     @Html.ActionLink("Hồ sơ ", "Details", new { id = Model.IDNguoiDung })
 </div>
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("MatKhau");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    }
+</script>

@@ -1,4 +1,4 @@
-﻿    using Healthhub_Online.Models;
+﻿using Healthhub_Online.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -61,33 +61,40 @@ namespace Healthhub_Online.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IDNguoiDung,HoTen,Email,DienThoai,TaiKhoan,MatKhau,IDGioiTinh,DiaChiCuThe,SoCMND,IDTinh,NhomMau,ThongTinKhac")] NguoiDung nguoiDung)
         {
-            bool usernameExists = db.NguoiDungs.Any(u => u.TaiKhoan == nguoiDung.TaiKhoan);
-            if (usernameExists)
-            {
-                ModelState.AddModelError("TaiKhoan", "Tài Khoản đã tồn tại");
-            }
+            var existingUser = db.NguoiDungs.Find(nguoiDung.IDNguoiDung);
+            bool changesDetected = false;
 
-            bool phoneExists = db.NguoiDungs.Any(u => u.DienThoai == nguoiDung.DienThoai);
-            if (phoneExists)
+
+            if (existingUser.DienThoai != nguoiDung.DienThoai && db.NguoiDungs.Any(u => u.DienThoai == nguoiDung.DienThoai && u.IDNguoiDung != nguoiDung.IDNguoiDung))
             {
                 ModelState.AddModelError("DienThoai", "Số điện thoại đã được đăng ký");
             }
+            else if (existingUser.DienThoai != nguoiDung.DienThoai)
+            {
+                changesDetected = true;
+            }
 
-            bool emailExists = db.NguoiDungs.Any(u => u.Email == nguoiDung.Email);
-            if (emailExists)
+            if (existingUser.Email != nguoiDung.Email && db.NguoiDungs.Any(u => u.Email == nguoiDung.Email && u.IDNguoiDung != nguoiDung.IDNguoiDung))
             {
                 ModelState.AddModelError("Email", "Email đã được đăng ký");
             }
-
-            if (ModelState.IsValid)
+            else if (existingUser.Email != nguoiDung.Email)
             {
-                db.Entry(nguoiDung).State = EntityState.Modified;
-                db.SaveChanges();
-                ViewBag.capnhat = " Cập nhật thành công ";
+                changesDetected = true;
             }
+
+            if (changesDetected && ModelState.IsValid)
+            {
+                db.Entry(existingUser).CurrentValues.SetValues(nguoiDung);
+                db.SaveChanges();
+                ViewBag.capnhat = "Cập nhật thành công.";
+            }
+
             ViewBag.IDGioiTinh = new SelectList(db.GioiTinhs, "IDGioiTinh", "GioiTinh1", nguoiDung.IDGioiTinh);
             ViewBag.IDTinh = new SelectList(db.TinhThanhs, "IDTinh", "TenTinh", nguoiDung.IDTinh);
             return View(nguoiDung);
+
+
         }
         protected override void Dispose(bool disposing)
         {
