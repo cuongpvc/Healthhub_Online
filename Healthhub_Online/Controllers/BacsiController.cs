@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Healthhub_Online.Models;
+using PagedList;
 
 namespace Healthhub_Online.Controllers
 {
@@ -80,6 +81,74 @@ namespace Healthhub_Online.Controllers
             return View(quanTri);
         }
 
+        public ActionResult KiemTraDanhGia(int? page)
+        {
+            var danhgia = db.DanhGias.OrderBy(x => x.IDDanhGia).ThenBy(y => y.IDDanhGiaChatLuong).ToList();
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(danhgia.ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult Kiemtralichhen(int? page)
+        {
+            var lich = db.LichKhams.OrderByDescending(x => x.BatDau).ThenBy(y => y.IDLichKham).ToList();
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(lich.ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult Lichdangcho(int? page)
+        {
+            var lich = db.LichKhams.OrderByDescending(x => x.BatDau).ThenBy(y => y.IDLichKham).Where(x => x.TrangThai == 0).ToList();
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(lich.ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult Lichdaxacnhan(int? page)
+        {
+            var lich = db.LichKhams.OrderByDescending(x => x.BatDau).ThenBy(y => y.IDLichKham).Where(x => x.TrangThai == 1).ToList();
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(lich.ToPagedList(pageNumber, pageSize));
+        }
+
+        // GET: Lichkham/Edit/5
+        public ActionResult Xacnhanlichhen(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LichKham lichKham = db.LichKhams.Find(id);
+            if (lichKham == null)
+            {
+                return HttpNotFound();
+            }
+            // NguoiDung n = new NguoiDung();
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs.Where(x => x.IDNguoiDung == lichKham.IDNguoiDung), "IDNguoiDung", "HoTen", lichKham.IDNguoiDung);
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris.Where(x => x.IDQuanTri == lichKham.IDQuanTri), "IDQuanTri", "HoTen", lichKham.IDQuanTri);
+            return View(lichKham);
+        }
+
+        // POST: Lichkham/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Xacnhanlichhen([Bind(Include = "IDLichKham,ChuDe,MoTa,BatDau,KetThuc,TrangThai,ZoomInfo,KetQuaKham,IDNguoiDung,IDQuanTri")] LichKham lichKham)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(lichKham).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Kiemtralichhen", "Bacsi");
+            }
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", lichKham.IDNguoiDung);
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan", lichKham.IDQuanTri);
+            return View(lichKham);
+        }
+
+
+
+
 
 
         protected override void Dispose(bool disposing)
@@ -90,5 +159,7 @@ namespace Healthhub_Online.Controllers
             }
             base.Dispose(disposing);
         }
+
+
     }
 }

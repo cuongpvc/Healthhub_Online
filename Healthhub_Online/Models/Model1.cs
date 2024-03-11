@@ -2,19 +2,13 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
-
 namespace Healthhub_Online.Models
 {
-    public partial class ModelWeb : DbContext
+    public partial class modelWeb : DbContext
     {
-        public ModelWeb()
-            : base("name=ModelWeb")
-        {
-        }
+
 
         public virtual DbSet<BenhAn> BenhAns { get; set; }
-        public virtual DbSet<DanhGia> DanhGias { get; set; }
-        public virtual DbSet<DanhGiaChatLuong> DanhGiaChatLuongs { get; set; }
         public virtual DbSet<GioiTinh> GioiTinhs { get; set; }
         public virtual DbSet<HoiDap> HoiDaps { get; set; }
         public virtual DbSet<Khoa> Khoas { get; set; }
@@ -22,6 +16,7 @@ namespace Healthhub_Online.Models
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
         public virtual DbSet<QuanTri> QuanTris { get; set; }
         public virtual DbSet<Solieucovid> Solieucovids { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TinhThanh> TinhThanhs { get; set; }
         public virtual DbSet<Tintuc> Tintucs { get; set; }
         public virtual DbSet<TrungTamGanNhat> TrungTamGanNhats { get; set; }

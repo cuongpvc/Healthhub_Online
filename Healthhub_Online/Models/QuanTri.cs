@@ -12,6 +12,7 @@ namespace Healthhub_Online.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public QuanTri()
         {
+            DanhGias = new HashSet<DanhGia>();
             HoiDaps = new HashSet<HoiDap>();
             LichKhams = new HashSet<LichKham>();
         }
@@ -41,6 +42,9 @@ namespace Healthhub_Online.Models
 
         [StringLength(100)]
         public string ThongtinZoom { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DanhGia> DanhGias { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoiDap> HoiDaps { get; set; }

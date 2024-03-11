@@ -91,9 +91,9 @@
                             <li>
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">HỎI ĐÁP<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="@Url.Action("Index", "Hoidap")">CÂU HỎI CỦA BẠN</a></li>
+                                    <li><a href="@Url.Action("Index", "Hoidap", new { id = u.IDNguoiDung})">CÂU HỎI CỦA BẠN</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="@Url.Action("Cauhoichoxuly", "Hoidap")">CÂU HỎI CHỜ GIẢI ĐÁP</a></li>
+                                    <li><a href="@Url.Action("Cauhoichoxuly", "Hoidap", new {id = u.IDNguoiDung})">CÂU HỎI CHỜ GIẢI ĐÁP</a></li>
                                     <li class="divider"></li>
                                     <li><a href="@Url.Action("ListAll", "Hoidap")">TẤT CẢ CÂU HỎI</a></li>
                                     @*<li class="divider"></li>*@
@@ -102,13 +102,14 @@
                             <li>
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">ĐẶT LỊCH HẸN <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="@Url.Action("Index", "LichKham")">LỊCH HẸN CỦA BẠN</a></li>
+                                    <li><a href="@Url.Action("Index", "LichKham", new { id = u.IDNguoiDung})">LỊCH HẸN CỦA BẠN</a></li>
                                     <li class="divider"></li>
                                     <li><a href="@Url.Action("Index", "LichKham")">ĐẶT LỊCH TƯ VẤN VIDEO</a></li>
                                     @*<li class="divider"></li>*@
                                 </ul>
                             <li>
                             <li>@Html.ActionLink(" TRUNG TÂM Y TẾ", "Index", "Trungtamyte", null, new { @class = "MauchuMenu" })</li>
+                            
                             <li>
                                 @Html.ActionLink("DANH SÁCH BÁC SĨ", "Index", "Bacsi")
                             </li>
@@ -118,9 +119,9 @@
                             {
                                 <ul class="nav navbar-nav">
                                     <li>
-                                        <a style="color:red" href="@Url.Action("Details", "Nguoidung")"> Hồ sơ </a>
+                                        <a style="color:red" href="@Url.Action("Details", "Nguoidung", new {id = u.IDNguoiDung})"> Hồ sơ </a>
                                     </li>
-                                    <li> @Html.ActionLink("Đăng Xuất", "Dangxuat", "Dangnhap", null, new { @class = "MauchuMenu" })</li>
+                                    <li> @Html.ActionLink("Đăng Xuất", "Dangxuat", "Home", null, new { @class = "MauchuMenu" })</li>
                                 </ul>
                             }
                             else
@@ -191,7 +192,7 @@
                                     <li>
                                         <a style="color:red" href="#"> Bác Sĩ</a>
                                     </li>
-                                    <li> @Html.ActionLink("Đăng Xuất", "DangXuatBS", "Home", null, new { @class = "MauchuMenu" })</li>
+                                    <li> @Html.ActionLink("Đăng Xuất", "Dangxuat", "Home", null, new { @class = "MauchuMenu" })</li>
                                 </ul>
                             }
                             else
