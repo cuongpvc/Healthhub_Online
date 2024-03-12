@@ -1409,6 +1409,10 @@
     <Content Include="Views\Home\Quenmatkhau.cshtml" />
     <Content Include="Views\Home\VerifyOTP.cshtml" />
     <Content Include="Views\Home\VerifyOTPForgotPassword.cshtml" />
+    <Content Include="Views\Home\TintucHotPartial.cshtml" />
+    <Content Include="Views\Home\TintucNewPartial.cshtml" />
+    <Content Include="Views\Home\Trangchu.cshtml" />
+    <Content Include="Views\Home\Xemchitiet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
