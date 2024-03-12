@@ -152,6 +152,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanTrisController.cs" />
     <Compile Include="Controllers\BacsiController.cs" />
     <Compile Include="Controllers\HoidapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -162,6 +163,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BenhAn.cs" />
+    <Compile Include="Models\DanhGia.cs" />
+    <Compile Include="Models\DanhGiaChatLuong.cs" />
     <Compile Include="Models\GioiTinh.cs" />
     <Compile Include="Models\HoiDap.cs" />
     <Compile Include="Models\Khoa.cs" />
@@ -170,7 +173,6 @@
     <Compile Include="Models\NguoiDung.cs" />
     <Compile Include="Models\QuanTri.cs" />
     <Compile Include="Models\Solieucovid.cs" />
-    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\TinhThanh.cs" />
     <Compile Include="Models\Tintuc.cs" />
     <Compile Include="Models\TrungTamGanNhat.cs" />
@@ -1250,6 +1252,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Nguoidung\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1371,20 +1376,37 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Bacsi\Index.cshtml" />
     <Content Include="Views\Hoidap\Index.cshtml" />
     <Content Include="Views\Lichkham\Index.cshtml" />
     <Content Include="Views\Nguoidung\Index.cshtml" />
     <Content Include="Views\Trungtamyte\Index.cshtml" />
-    <Content Include="Views\Home\Dangnhap.cshtml" />
-    <Content Include="Views\Home\Dangky.cshtml" />
-    <Content Include="Views\Home\VerifyOTP.cshtml" />
-    <Content Include="Views\Home\Quenmatkhau.cshtml" />
-    <Content Include="Views\Home\VerifyOTPForgotPassword.cshtml" />
-    <Content Include="Views\Home\Datlaimatkhau.cshtml" />
+    <Content Include="Views\Dangnhap\Dangnhap.cshtml" />
+    <Content Include="Views\Dangky\Dangky.cshtml" />
+    <Content Include="Views\Dangky\VerifyOTP.cshtml" />
+    <Content Include="Views\Shared\LayoutAdmin.cshtml" />
+    <Content Include="Views\Lichkham\Create.cshtml" />
+    <Content Include="Views\Lichkham\Details.cshtml" />
+    <Content Include="Views\Lichkham\Edit.cshtml" />
+    <Content Include="Views\Lichkham\Delete.cshtml" />
+    <Content Include="Views\Lichkham\Dangxuly.cshtml" />
+    <Content Include="Views\Lichkham\Daxacnhan.cshtml" />
+    <Content Include="Views\Lichkham\Datuvanxong.cshtml" />
+    <Content Include="Views\Lichkham\Lichdangluoi.cshtml" />
+    <Content Include="Views\Lichkham\lichhen.cshtml" />
+    <Content Include="Views\Bacsi\Kiemtralichhen.cshtml" />
+    <Content Include="Views\Bacsi\Lichdangcho.cshtml" />
+    <Content Include="Views\Bacsi\Lichdaxacnhan.cshtml" />
+    <Content Include="Views\Bacsi\Xacnhanlichhen.cshtml" />
+    <Content Include="Views\Bacsi\Details.cshtml" />
+    <Content Include="Views\Bacsi\Edit.cshtml" />
+    <Content Include="Views\Bacsi\Index.cshtml" />
+    <Content Include="Views\Lichkham\DanhGia.cshtml" />
+    <Content Include="Views\Bacsi\KiemTraDanhGia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\QuanTris\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
