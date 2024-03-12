@@ -1379,6 +1379,9 @@
     <Content Include="Views\Home\Dangnhap.cshtml" />
     <Content Include="Views\Home\Dangky.cshtml" />
     <Content Include="Views\Home\VerifyOTP.cshtml" />
+    <Content Include="Views\Home\Quenmatkhau.cshtml" />
+    <Content Include="Views\Home\VerifyOTPForgotPassword.cshtml" />
+    <Content Include="Views\Home\Datlaimatkhau.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
