@@ -1404,6 +1404,8 @@
     <Content Include="Views\Bacsi\KiemTraDanhGia.cshtml" />
     <Content Include="Views\Trungtamyte\Details.cshtml" />
     <Content Include="Views\Trungtamyte\Edit.cshtml" />
+    <Content Include="Views\Nguoidung\Details.cshtml" />
+    <Content Include="Views\Nguoidung\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
