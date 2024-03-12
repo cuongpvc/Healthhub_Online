@@ -1403,6 +1403,12 @@
     <Content Include="Views\Trungtamyte\Edit.cshtml" />
     <Content Include="Views\Nguoidung\Details.cshtml" />
     <Content Include="Views\Nguoidung\Edit.cshtml" />
+    <Content Include="Views\Home\Dangky.cshtml" />
+    <Content Include="Views\Home\Dangnhap.cshtml" />
+    <Content Include="Views\Home\Datlaimatkhau.cshtml" />
+    <Content Include="Views\Home\Quenmatkhau.cshtml" />
+    <Content Include="Views\Home\VerifyOTP.cshtml" />
+    <Content Include="Views\Home\VerifyOTPForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
