@@ -1380,8 +1380,6 @@
     <Content Include="Views\Home\Dangnhap.cshtml" />
     <Content Include="Views\Home\Dangky.cshtml" />
     <Content Include="Views\Home\VerifyOTP.cshtml" />
-    <Content Include="Views\Trungtamyte\Details.cshtml" />
-    <Content Include="Views\Trungtamyte\Trungtamyte.cshtml" />
     <Content Include="Views\Nguoidung\Details.cshtml" />
     <Content Include="Views\Nguoidung\Edit.cshtml" />
   </ItemGroup>

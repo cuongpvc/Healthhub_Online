@@ -8,32 +8,30 @@
 <hr />
 <center><h1>Tra cứu trung tâm y tế hỗ trợ gần nhất</h1> </center>
 
-@using (Html.BeginForm("Trungtamyte", "Trungtamyte", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-            
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.AntiForgeryToken()
 
-        <div>
-            <input type="text" id="userLocation" placeholder="Enter your location" />
-            <button onclick="findHospitals()">Find Nearby Hospitals</button>
-        </div>
-        <div id="map" style="height: 500px; width: 100%;"></div>
+<div class="form-horizontal">
 
-        <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBjb_Z2OTxoX2_XQ07hRLbwr49eF1sYdQ&callback=initMap&libraries=places">
-        </script>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
+    <div>
+        <input type="text" id="userLocation" placeholder="Enter your location" />
+        <button onclick="findHospitals()">Find Nearby Hospitals</button>
     </div>
-    <center>
+    <div id="map" style="height: 500px; width: 100%;"></div>
 
-    </center>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBjb_Z2OTxoX2_XQ07hRLbwr49eF1sYdQ&callback=initMap&libraries=places">
+    </script>
 
-}
+
+</div>
+<center>
+
+</center>
+
 
 <script>
     var map;
