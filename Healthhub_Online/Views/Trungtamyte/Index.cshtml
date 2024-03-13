@@ -13,27 +13,84 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
+            
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            <h3>@Html.LabelFor(model => model.IDTinh, "Chọn tỉnh thành", htmlAttributes: new { @class = "control-label col-md-4" })</h3>
-            <div class="col-md-8">
-                @Html.DropDownList("IDTinh", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IDTinh, "", new { @class = "text-danger" })
-            </div>
+        <div>
+            <input type="text" id="userLocation" placeholder="Enter your location" />
+            <button onclick="findHospitals()">Find Nearby Hospitals</button>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-4 col-md-8">
-                <input type="submit" value="Tra cứu" class="btn btn-success" />
-            </div>
-        </div>
+        <div id="map" style="height: 500px; width: 100%;"></div>
+
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBjb_Z2OTxoX2_XQ07hRLbwr49eF1sYdQ&callback=initMap&libraries=places">
+        </script>
+
+
     </div>
     <center>
 
-        <img src="~/Common/images/map.jpg" class="img-responsive" />
     </center>
 
 }
 
+<script>
+    var map;
+    var service;
+    var infowindow;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10
+        });
+        infowindow = new google.maps.InfoWindow();
+    }
+
+    function findHospitals() {
+        var locationInput = document.getElementById('userLocation').value;
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({ 'address': locationInput }, function (results, status) {
+            if (status == 'OK') {
+                map.setCenter(results[0].geometry.location);
+                var userMarker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+
+                markNearbyHospitals(map, results[0].geometry.location);
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+
+    function markNearbyHospitals(map, center) {
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+            location: center,
+            radius: 5000, // Search within 5km radius
+            type: ['hospital']
+        }, function (results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
+                }
+            }
+        });
+    }
+
+    function createMarker(place) {
+        var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location,
+            title: place.name
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            infowindow.setContent(place.name);
+            infowindow.open(map, this);
+        });
+    }
+</script>

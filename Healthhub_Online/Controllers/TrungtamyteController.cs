@@ -24,13 +24,13 @@ namespace Healthhub_Online.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Trungtamyte(FormCollection id)
-        {
-            String str = id["IDTinh"].ToString();
-            int idT = int.Parse(str);
-            var tt = db.TrungTamGanNhats.Where(h => h.IDTinh == idT).Include(h => h.TinhThanh).ToList();
-            return View(tt);
-        }
+        //public ActionResult Trungtamyte(FormCollection id)
+        //{
+        //    String str = id["IDTinh"].ToString();
+        //    int idT = int.Parse(str);
+        //    var tt = db.TrungTamGanNhats.Where(h => h.IDTinh == idT).Include(h => h.TinhThanh).ToList();
+        //    return View(tt);
+        //}
 
         public ActionResult Details(int? id)
         {
