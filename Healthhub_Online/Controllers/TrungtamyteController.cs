@@ -13,38 +13,11 @@ namespace Healthhub_Online.Controllers
     {
         ModelWeb db = new ModelWeb();
         [HttpGet]
-        public ActionResult Index()
-        {
-            ViewBag.IDTinh = new SelectList(db.TinhThanhs, "IDTinh", "TenTinh");
-            return View();
-        }
-        [HttpGet]
-        public ActionResult Trungtamyte()
+        public ActionResult TraCuu()
         {
             return View();
         }
-        [HttpPost]
-        //public ActionResult Trungtamyte(FormCollection id)
-        //{
-        //    String str = id["IDTinh"].ToString();
-        //    int idT = int.Parse(str);
-        //    var tt = db.TrungTamGanNhats.Where(h => h.IDTinh == idT).Include(h => h.TinhThanh).ToList();
-        //    return View(tt);
-        //}
 
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-            }
-            TrungTamGanNhat tt = db.TrungTamGanNhats.Find(id);
-            if (tt == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tt);
-        }
 
     }
 
