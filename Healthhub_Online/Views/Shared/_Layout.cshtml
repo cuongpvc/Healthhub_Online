@@ -32,7 +32,6 @@
                     <ul class="nav navbar-nav">
                         <li> <img src="~/Common/images/logo.png" width="100" height="50" alt=""></li>
                         <li>@Html.ActionLink(" TRANG CHỦ ", "Index", "Home", null, new { @class = "MauchuMenu" })</li>
-                        @*<li>@Html.ActionLink(" TIN TỨC COVID ", "listAll", "Hoidap", null, new { @class = "MauchuMenu" })</li>*@
                         <li>@Html.ActionLink(" HỎI ĐÁP ONILNE", "listAll", "Hoidap", null, new { @class = "MauchuMenu" })</li>
                         <li>@Html.ActionLink(" TRUNG TÂM Y TẾ", "TraCuu", "Trungtamyte", null, new { @class = "MauchuMenu" })</li>
                     </ul>
@@ -108,7 +107,7 @@
                                     @*<li class="divider"></li>*@
                                 </ul>
                             <li>
-                            <li>@Html.ActionLink(" TRUNG TÂM Y TẾ", "Index", "Trungtamyte", null, new { @class = "MauchuMenu" })</li>
+                            <li>@Html.ActionLink(" TRUNG TÂM Y TẾ", "TraCuu", "Trungtamyte", null, new { @class = "MauchuMenu" })</li>
                             
                             <li>
                                 @Html.ActionLink("DANH SÁCH BÁC SĨ", "Index", "Bacsi")
