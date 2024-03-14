@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <hr />
-<center><h1>Tra cứu trung tâm y tế hỗ trợ gần nhất</h1> </center>
+<center><h1>Tra cứu trung tâm y tế gần nhất</h1> </center>
 
 
 @Html.AntiForgeryToken()
@@ -20,11 +20,12 @@
         <input type="text" id="userLocation" placeholder="Enter your location" />
         <button onclick="findHospitals()">Find Nearby Hospitals</button>
     </div>
-    <div id="map" style="height: 500px; width: 100%;"></div>
-
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBjb_Z2OTxoX2_XQ07hRLbwr49eF1sYdQ&callback=initMap&libraries=places">
     </script>
+    <div id="map" style="height: 500px; width: 100%;"></div>
+
+
 
 
 </div>
