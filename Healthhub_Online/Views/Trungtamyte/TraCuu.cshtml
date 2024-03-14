@@ -8,7 +8,11 @@
 <hr />
 <center><h1>Tra cứu trung tâm y tế gần nhất</h1> </center>
 
-
+@using Healthhub_Online.Models
+@{
+    var u = Session["user"] as Healthhub_Online.Models.NguoiDung;
+    var userBS = Session["userBS"] as Healthhub_Online.Models.QuanTri;
+}
 @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
@@ -16,8 +20,17 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+    @{
+        string diachi;
+        if (u != null)
+        {
+            diachi = u.DiaChiCuThe;
+        }
+        else { diachi = ""; }
+
+    }
     <div>
-        <input type="text" id="userLocation" placeholder="Enter your location" value="@Model" />
+        <input type="text" id="userLocation" placeholder="Enter your location" value="@diachi" />
         <button onclick="findHospitals()">Find Nearby Hospitals</button>
     </div>
     <script async defer
