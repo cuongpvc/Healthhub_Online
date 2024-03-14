@@ -1379,7 +1379,6 @@
     <Content Include="Views\Hoidap\Index.cshtml" />
     <Content Include="Views\Lichkham\Index.cshtml" />
     <Content Include="Views\Nguoidung\Index.cshtml" />
-    <Content Include="Views\Trungtamyte\Index.cshtml" />
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Lichkham\Create.cshtml" />
     <Content Include="Views\Lichkham\Details.cshtml" />
@@ -1399,8 +1398,6 @@
     <Content Include="Views\Bacsi\Index.cshtml" />
     <Content Include="Views\Lichkham\DanhGia.cshtml" />
     <Content Include="Views\Bacsi\KiemTraDanhGia.cshtml" />
-    <Content Include="Views\Trungtamyte\Details.cshtml" />
-    <Content Include="Views\Trungtamyte\Edit.cshtml" />
     <Content Include="Views\Nguoidung\Details.cshtml" />
     <Content Include="Views\Nguoidung\Edit.cshtml" />
     <Content Include="Views\Home\Dangky.cshtml" />
@@ -1409,6 +1406,7 @@
     <Content Include="Views\Home\Quenmatkhau.cshtml" />
     <Content Include="Views\Home\VerifyOTP.cshtml" />
     <Content Include="Views\Home\VerifyOTPForgotPassword.cshtml" />
+    <Content Include="Views\Trungtamyte\TraCuu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
