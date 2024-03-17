@@ -33,6 +33,21 @@
             @Html.ValidationMessageFor(model => model.IDQuanTri, "", new { @class = "text-danger" })
         </div>
     </div>
+
+
+    <div class="form-group">
+        @Html.Label("Thời gian bắt đầu", htmlAttributes: new { @class = "control-label col-md-6" })
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.LichKham.BatDau)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Thời gian kết thúc", htmlAttributes: new { @class = "control-label col-md-6" })
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.LichKham.KetThuc)
+        </div>
+    </div>
     <div class="form-group">
         @Html.LabelFor(model => model.NoiDung, " Nội Dung", htmlAttributes: new { @class = "control-label col-md-6" })
         <div class="col-md-6">
@@ -50,7 +65,10 @@
             @Html.ValidationMessageFor(model => model.IDDanhGiaChatLuong, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    @* Hidden fields to send IDLichKham, BatDau, KetThuc to the controller *@
+    @Html.HiddenFor(model => model.IDLichKham)
+    @Html.HiddenFor(model => model.LichKham.BatDau)
+    @Html.HiddenFor(model => model.LichKham.KetThuc)
 
     <div class="form-group">
         <div class="col-md-offset-6 col-md-6">

@@ -13,6 +13,7 @@ namespace Healthhub_Online.Models
         public LichKham()
         {
             BenhAns = new HashSet<BenhAn>();
+            DanhGias = new HashSet<DanhGia>();
         }
 
         [Key]
@@ -48,5 +49,8 @@ namespace Healthhub_Online.Models
         public virtual NguoiDung NguoiDung { get; set; }
 
         public virtual QuanTri QuanTri { get; set; }
+
+        public virtual ICollection<DanhGia> DanhGias { get; set; }
+
     }
 }
