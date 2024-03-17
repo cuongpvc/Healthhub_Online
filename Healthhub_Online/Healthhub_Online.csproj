@@ -1407,6 +1407,7 @@
     <Content Include="Views\Home\VerifyOTP.cshtml" />
     <Content Include="Views\Home\VerifyOTPForgotPassword.cshtml" />
     <Content Include="Views\Trungtamyte\TraCuu.cshtml" />
+    <Content Include="Views\Hoidap\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
