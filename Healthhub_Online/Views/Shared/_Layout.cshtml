@@ -189,7 +189,7 @@
                             {
                                 <ul class="nav navbar-nav">
                                     <li>
-                                        <a style="color:red" href="#"> Bác Sĩ</a>
+                                        <a style="color:red" href="@Url.Action("Details", "BacSi", new {id = userBS.IDQuanTri})"> Bác Sĩ</a>
                                     </li>
                                     <li> @Html.ActionLink("Đăng Xuất", "Dangxuat", "Home", null, new { @class = "MauchuMenu" })</li>
                                 </ul>
