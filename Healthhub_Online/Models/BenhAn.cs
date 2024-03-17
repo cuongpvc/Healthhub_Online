@@ -28,9 +28,11 @@ namespace Healthhub_Online.Models
         public int? IDNguoiDung { get; set; }
 
         public int? IDLichKham { get; set; }
+        public int? IDQuanTri { get; set; }
 
         public virtual LichKham LichKham { get; set; }
 
         public virtual NguoiDung NguoiDung { get; set; }
+        public virtual QuanTri QuanTri {  get; set; } 
     }
 }

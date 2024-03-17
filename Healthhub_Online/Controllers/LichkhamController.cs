@@ -51,35 +51,55 @@ namespace Healthhub_Online.Controllers
             ViewBag.id = id;
             return View(lichKhams.ToPagedList(pageNumber, pageSize));
         }
-        
-        public ActionResult DanhGia()
+
+        public ActionResult DanhGia(int id)
         {
-            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen");
-            ViewBag.IDQuanTri = new SelectList(db.QuanTris.Where(n => n.VaiTro == 2), "IDQuanTri", "HoTen");
-            ViewBag.IDDanhGiaChatLuong = new SelectList(db.DanhGiaChatLuongs, "IDDanhGiaChatLuong", "DanhGiaChatLuong1");
-            return View();
-            
+            var lichKham = db.LichKhams.Find(id);
+            if (lichKham == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Create a new DanhGia object for the view
+            var danhGia = new DanhGia
+            {
+                IDNguoiDung = lichKham.IDNguoiDung,
+                IDQuanTri = lichKham.IDQuanTri,
+                LichKham = lichKham
+            };
+
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", danhGia.IDNguoiDung);
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "HoTen", danhGia.IDQuanTri);
+            ViewBag.IDDanhGiaChatLuong = new SelectList(db.DanhGiaChatLuongs, "IDDanhGiaChatLuong", "DanhGiaChatLuong1", danhGia.IDDanhGiaChatLuong);
+
+            return View(danhGia);
         }
+
         // POST: Lichkham/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DanhGia([Bind(Include = "IDDanhGia,NoiDung,IDDanhGiaChatLuong,IDNguoiDung,IDQuanTri")] DanhGia danhGia)
+        public ActionResult DanhGia(DanhGia danhGia)
         {
             if (ModelState.IsValid)
             {
-                
+                // Save danhGia to the database
                 db.DanhGias.Add(danhGia);
                 db.SaveChanges();
-                return RedirectToAction("Datuvanxong", "LichKham", new { id = danhGia.IDNguoiDung });
+
+                // Redirect to Datuvanxong action with the user's ID
+                return RedirectToAction("Datuvanxong", new { id = danhGia.IDNguoiDung });
             }
 
             ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", danhGia.IDNguoiDung);
             ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "HoTen", danhGia.IDQuanTri);
             ViewBag.IDDanhGiaChatLuong = new SelectList(db.DanhGiaChatLuongs, "IDDanhGiaChatLuong", "DanhGiaChatLuong1", danhGia.IDDanhGiaChatLuong);
+
+            // If ModelState is not valid, return back to the form with validation errors
             return View(danhGia);
         }
+
         // GET: Lichkham/Details/5
         public ActionResult Details(int? id)
         {

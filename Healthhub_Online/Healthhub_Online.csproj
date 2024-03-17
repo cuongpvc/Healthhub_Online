@@ -1390,7 +1390,7 @@
     <Content Include="Views\Lichkham\Datuvanxong.cshtml" />
     <Content Include="Views\Lichkham\Lichdangluoi.cshtml" />
     <Content Include="Views\Lichkham\lichhen.cshtml" />
-    <Content Include="Views\Bacsi\Kiemtralichhen.cshtml" />
+    <Content Include="Views\Bacsi\Lichdatuvan.cshtml" />
     <Content Include="Views\Bacsi\Lichdangcho.cshtml" />
     <Content Include="Views\Bacsi\Lichdaxacnhan.cshtml" />
     <Content Include="Views\Bacsi\Xacnhanlichhen.cshtml" />

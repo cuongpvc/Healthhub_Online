@@ -335,7 +335,7 @@ namespace Healthhub_Online.Controllers
             return RedirectToAction("Dangnhap", "Home");
         }
 
-        public ActionResult DangXuat()
+        public ActionResult DangXuatU()
         {
             Session["user"] = null;
             return RedirectToAction("Index", "Home");

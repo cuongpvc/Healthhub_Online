@@ -88,9 +88,9 @@ namespace Healthhub_Online.Controllers
             int pageNumber = (page ?? 1);
             return View(danhgia.ToPagedList(pageNumber, pageSize));
         }
-        public ActionResult Kiemtralichhen(int? page)
+        public ActionResult Lichdatuvan(int? page)
         {
-            var lich = db.LichKhams.OrderByDescending(x => x.BatDau).ThenBy(y => y.IDLichKham).ToList();
+            var lich = db.LichKhams.OrderByDescending(x => x.BatDau).ThenBy(y => y.IDLichKham).Where(x => x.TrangThai == 2).ToList();
             int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(lich.ToPagedList(pageNumber, pageSize));
@@ -139,7 +139,7 @@ namespace Healthhub_Online.Controllers
             {
                 db.Entry(lichKham).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Kiemtralichhen", "Bacsi");
+                return RedirectToAction("Lichdaxacnhan", "Bacsi");
             }
             ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", lichKham.IDNguoiDung);
             ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan", lichKham.IDQuanTri);
