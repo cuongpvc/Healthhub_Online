@@ -2,23 +2,69 @@
 
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "TraCuu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <hr />
 <center><h1>Tra cứu trung tâm y tế gần nhất</h1> </center>
 
-
+@using Healthhub_Online.Models
+@{
+    var u = Session["user"] as Healthhub_Online.Models.NguoiDung;
+    var userBS = Session["userBS"] as Healthhub_Online.Models.QuanTri;
+}
 @Html.AntiForgeryToken()
+<head>
+    <style>
+        .centered-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
 
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
 <div class="form-horizontal">
 
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+    @{
+        string diachi;
+        if (u != null)
+        {
+            diachi = u.DiaChiCuThe;
+        }
+        else { diachi = ""; }
+
+    }
     <div>
-        <input type="text" id="userLocation" placeholder="Enter your location" />
-        <button onclick="findHospitals()">Find Nearby Hospitals</button>
+        <input type="text" id="userLocation" placeholder="Địa chỉ của bạn" value="@diachi" />
+        <button onclick="findHospitals()">Tìm kiếm</button>
     </div>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBjb_Z2OTxoX2_XQ07hRLbwr49eF1sYdQ&callback=initMap&libraries=places">
@@ -69,7 +115,7 @@
         service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
             location: center,
-            radius: 5000, // Search within 5km radius
+            radius: 5000,
             type: ['hospital']
         }, function (results, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {

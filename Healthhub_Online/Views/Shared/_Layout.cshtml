@@ -108,7 +108,7 @@
                                     @*<li class="divider"></li>*@
                                 </ul>
                             <li>
-                            <li>@Html.ActionLink(" TRUNG TÂM Y TẾ", "Index", "Trungtamyte", null, new { @class = "MauchuMenu" })</li>
+                            <li>@Html.ActionLink(" TRUNG TÂM Y TẾ", "TraCuu", "Trungtamyte", null, new { @class = "MauchuMenu" })</li>
                             <li>
                                 @Html.ActionLink("DANH SÁCH BÁC SĨ", "Index", "Bacsi")
                             </li>
@@ -118,7 +118,7 @@
                             {
                                 <ul class="nav navbar-nav">
                                     <li>
-                                        <a style="color:red" href="@Url.Action("Details", "Nguoidung")"> Hồ sơ </a>
+                                        <a style="color:red" href="@Url.Action("Details", "Nguoidung", new {id = u.IDNguoiDung})"> Hồ sơ </a>
                                     </li>
                                     <li> @Html.ActionLink("Đăng Xuất", "Dangxuat", "Home", null, new { @class = "MauchuMenu" })</li>
                                 </ul>

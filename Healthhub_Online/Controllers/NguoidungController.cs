@@ -58,53 +58,47 @@ namespace Healthhub_Online.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDNguoiDung,HoTen,Email,DienThoai,TaiKhoan,MatKhau,IDGioiTinh,DiaChiCuThe,SoCMND,IDTinh,NhomMau,ThongTinKhac")] NguoiDung nguoiDung)
+        public ActionResult Edit([Bind(Include = "IDNguoiDung,HoTen,Email,DienThoai,TaiKhoan,MatKhau,IDGioiTinh,DiaChiCuThe,SoCMND,IDTinh,NhomMau,ThongTinKhac,AnhDaiDien")] NguoiDung nguoiDung)
+
         {
             var existingUser = db.NguoiDungs.Find(nguoiDung.IDNguoiDung);
 
 
-                bool changesDetected = false;
+            bool changesDetected = false;
 
-                if (existingUser.TaiKhoan != nguoiDung.TaiKhoan && db.NguoiDungs.Any(u => u.TaiKhoan == nguoiDung.TaiKhoan && u.IDNguoiDung != nguoiDung.IDNguoiDung))
-                {
-                    ModelState.AddModelError("TaiKhoan", "Tài Khoản đã tồn tại");
-                }
-                else if (existingUser.TaiKhoan != nguoiDung.TaiKhoan)
-                {
-                    changesDetected = true;
-                }
 
-                if (existingUser.DienThoai != nguoiDung.DienThoai && db.NguoiDungs.Any(u => u.DienThoai == nguoiDung.DienThoai && u.IDNguoiDung != nguoiDung.IDNguoiDung))
-                {
-                    ModelState.AddModelError("DienThoai", "Số điện thoại đã được đăng ký");
-                }
-                else if (existingUser.DienThoai != nguoiDung.DienThoai)
-                {
-                    changesDetected = true;
-                }
+            if (existingUser.DienThoai != nguoiDung.DienThoai && db.NguoiDungs.Any(u => u.DienThoai == nguoiDung.DienThoai && u.IDNguoiDung != nguoiDung.IDNguoiDung))
+            {
+                ModelState.AddModelError("DienThoai", "Số điện thoại đã được đăng ký");
+            }
+            else if (existingUser.DienThoai != nguoiDung.DienThoai)
+            {
+                changesDetected = true;
+            }
 
-                if (existingUser.Email != nguoiDung.Email && db.NguoiDungs.Any(u => u.Email == nguoiDung.Email && u.IDNguoiDung != nguoiDung.IDNguoiDung))
-                {
-                    ModelState.AddModelError("Email", "Email đã được đăng ký");
-                }
-                else if (existingUser.Email != nguoiDung.Email)
-                {
-                    changesDetected = true;
-                }
+            if (existingUser.Email != nguoiDung.Email && db.NguoiDungs.Any(u => u.Email == nguoiDung.Email && u.IDNguoiDung != nguoiDung.IDNguoiDung))
+            {
+                ModelState.AddModelError("Email", "Email đã được đăng ký");
+            }
+            else if (existingUser.Email != nguoiDung.Email)
+            {
+                changesDetected = true;
+            }
 
-                if (changesDetected && ModelState.IsValid)
-                {
-                    db.Entry(existingUser).CurrentValues.SetValues(nguoiDung);
-                    db.SaveChanges();
-                    ViewBag.capnhat = "Cập nhật thành công.";
-                }
+            if (changesDetected && ModelState.IsValid)
+            {
+                db.Entry(existingUser).CurrentValues.SetValues(nguoiDung);
+                db.SaveChanges();
+                ViewBag.capnhat = "Cập nhật thành công.";
+            }
 
-                ViewBag.IDGioiTinh = new SelectList(db.GioiTinhs, "IDGioiTinh", "GioiTinh1", nguoiDung.IDGioiTinh);
-                ViewBag.IDTinh = new SelectList(db.TinhThanhs, "IDTinh", "TenTinh", nguoiDung.IDTinh);
-                return View(nguoiDung);
-            
+            ViewBag.IDGioiTinh = new SelectList(db.GioiTinhs, "IDGioiTinh", "GioiTinh1", nguoiDung.IDGioiTinh);
+            ViewBag.IDTinh = new SelectList(db.TinhThanhs, "IDTinh", "TenTinh", nguoiDung.IDTinh);
+            return View(nguoiDung);
+
 
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
