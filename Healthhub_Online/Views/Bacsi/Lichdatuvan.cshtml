@@ -22,15 +22,10 @@
         <th>
             Người đặt lịch
         </th>
-        @*<th>
-                Bác sĩ tư vấn
-            </th>*@
         <th>
             Nội dung cần tư vấn
         </th>
-        @*<th>
-                Mô tả
-            </th>*@
+        
         <th>
             Hẹn vào lúc
         </th>
@@ -44,7 +39,7 @@
             Link ZOOM
         </th>
         <th>
-            Ghi chú tư vấn
+            File bệnh án
         </th>
         <th></th>
     </tr>
@@ -55,15 +50,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NguoiDung.HoTen)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.QuanTri.TaiKhoan)
-                </td>*@
+            
             <td>
                 @Html.DisplayFor(modelItem => item.ChuDe)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.MoTa)
-                </td>*@
+           
             <td>
                 @Html.DisplayFor(modelItem => item.BatDau)
             </td>
@@ -98,9 +89,9 @@
                 @Html.DisplayFor(modelItem => item.KetQuaKham)
             </td>
             <td>
-                <button class="">
-                    @Html.ActionLink("Xác nhận", "Xacnhanlichhen", new { id = item.IDLichKham })
-                </button>
+                
+                    <a href="@Url.Action("Guibenhan", "Bacsi", new { id = item.IDLichKham })" class="btn btn-primary">Bệnh Án</a>
+                
             </td>
         </tr>
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -99,6 +100,54 @@ namespace Healthhub_Online.Controllers
             // If ModelState is not valid, return back to the form with validation errors
             return View(danhGia);
         }
+
+
+        // GET: LichKham/Benhan
+        public ActionResult Benhan(int id)
+        {
+            LichKham lichKham = db.LichKhams.Find(id);
+            if (lichKham == null || string.IsNullOrEmpty(lichKham.KetQuaKham))
+            {
+                ViewBag.Message = "File bệnh án chưa được gửi.";
+                return View();
+            }
+
+            // Truyền tên file bệnh án vào view
+            string path = Path.Combine(Server.MapPath("~/UploadedFiles"), lichKham.KetQuaKham);
+            ViewBag.FilePath = path;
+            ViewBag.IDLichKham = id; // Truyền ID của lịch khám
+
+            return View();
+        }
+
+        // GET: LichKham/DownloadFile
+        public ActionResult DownloadFile(int id)
+        {
+            LichKham lichKham = db.LichKhams.Find(id);
+            if (lichKham == null || string.IsNullOrEmpty(lichKham.KetQuaKham))
+            {
+                ViewBag.Message = "File bệnh án chưa được gửi.";
+                return View("Benhan");
+            }
+
+            // Tạo đường dẫn đến file
+            string path = Path.Combine(Server.MapPath("~/UploadedFiles"), lichKham.KetQuaKham);
+
+            // Kiểm tra file tồn tại trên server
+            if (!System.IO.File.Exists(path))
+            {
+                ViewBag.Message = "File không tồn tại trên server.";
+                return View("Benhan");
+            }
+
+            // Tải file về
+            return File(path, "application/force-download", Path.GetFileName(path));
+        }
+
+
+
+
+
 
         // GET: Lichkham/Details/5
         public ActionResult Details(int? id)
@@ -202,6 +251,19 @@ namespace Healthhub_Online.Controllers
             db.LichKhams.Remove(lichKham);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+       
+
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 
