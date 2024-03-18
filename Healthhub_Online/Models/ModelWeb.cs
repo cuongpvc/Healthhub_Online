@@ -12,7 +12,7 @@ namespace Healthhub_Online.Models
         {
         }
 
-        public virtual DbSet<BenhAn> BenhAns { get; set; }
+        
         public virtual DbSet<DanhGia> DanhGias { get; set; }
         public virtual DbSet<DanhGiaChatLuong> DanhGiaChatLuongs { get; set; }
         public virtual DbSet<GioiTinh> GioiTinhs { get; set; }
@@ -21,10 +21,10 @@ namespace Healthhub_Online.Models
         public virtual DbSet<LichKham> LichKhams { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
         public virtual DbSet<QuanTri> QuanTris { get; set; }
-        public virtual DbSet<Solieucovid> Solieucovids { get; set; }
+        public virtual DbSet<Solieudichbenh> Solieudichbenh { get; set; }
         public virtual DbSet<TinhThanh> TinhThanhs { get; set; }
         public virtual DbSet<Tintuc> Tintucs { get; set; }
-        public virtual DbSet<TrungTamGanNhat> TrungTamGanNhats { get; set; }
+        
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -60,7 +60,7 @@ namespace Healthhub_Online.Models
                 .Property(e => e.AnhBia)
                 .IsFixedLength();
 
-            modelBuilder.Entity<Solieucovid>()
+            modelBuilder.Entity<Solieudichbenh>()
                 .Property(e => e.Ghichu)
                 .IsFixedLength();
 
