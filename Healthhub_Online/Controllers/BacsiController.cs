@@ -139,16 +139,46 @@ namespace Healthhub_Online.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Xacnhanlichhen([Bind(Include = "IDLichKham,ChuDe,MoTa,BatDau,KetThuc,TrangThai,ZoomInfo,KetQuaKham,IDNguoiDung,IDQuanTri")] LichKham lichKham)
         {
+            // Check if the start time is before the current date
+            if (lichKham.BatDau < DateTime.Now)
+            {
+                ModelState.AddModelError("BatDau", "Thời gian bắt đầu phải lớn hơn ngày hiện tại.");
+            }
+
+            // Check if the end time is before the start time
+            if (lichKham.KetThuc < lichKham.BatDau)
+            {
+                ModelState.AddModelError("KetThuc", "Thời gian kết thúc phải lớn hơn thời gian bắt đầu.");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(lichKham).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Lichdaxacnhan", "Bacsi");
             }
+
+            // Check if ZoomInfo is empty
+            if (string.IsNullOrWhiteSpace(lichKham.ZoomInfo))
+            {
+                ModelState.AddModelError("ZoomInfo", "Vui lòng nhập link Zoom.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(lichKham).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Lichdaxacnhan", "Bacsi");
+            }
+
+            // If ModelState is not valid, reload the view with errors and data
             ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", lichKham.IDNguoiDung);
             ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan", lichKham.IDQuanTri);
+
+            // Return the view with model and errors
             return View(lichKham);
         }
+
 
         // GET: Bacsi/Guibenhan
         public ActionResult Guibenhan(int id)

@@ -55,6 +55,12 @@ namespace Healthhub_Online.Controllers
 
         public ActionResult DanhGia(int id)
         {
+            // Check for success message
+            if (TempData["SuccessMessage"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
+            }
+
             var lichKham = db.LichKhams.Find(id);
             if (lichKham == null)
             {
@@ -76,6 +82,7 @@ namespace Healthhub_Online.Controllers
             return View(danhGia);
         }
 
+
         // POST: Lichkham/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -88,6 +95,8 @@ namespace Healthhub_Online.Controllers
                 // Save danhGia to the database
                 db.DanhGias.Add(danhGia);
                 db.SaveChanges();
+
+                TempData["SuccessMessage"] = "Đánh giá của bạn đã được gửi thành công.";
 
                 // Redirect to Datuvanxong action with the user's ID
                 return RedirectToAction("Datuvanxong", new { id = danhGia.IDNguoiDung });
@@ -177,6 +186,31 @@ namespace Healthhub_Online.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IDLichKham,ChuDe,MoTa,BatDau,KetThuc,TrangThai,ZoomInfo,KetQuaKham,IDNguoiDung,IDQuanTri")] LichKham lichKham)
         {
+            // Kiểm tra nếu chủ đề trống
+            if (string.IsNullOrWhiteSpace(lichKham.ChuDe))
+            {
+                ModelState.AddModelError("ChuDe", "Chủ đề không được để trống.");
+            }
+
+            // Kiểm tra nếu chủ đề chứa ký tự đặc biệt hoặc số
+            if (!string.IsNullOrEmpty(lichKham.ChuDe) && (lichKham.ChuDe.Any(char.IsSymbol) || lichKham.ChuDe.Any(char.IsDigit)))
+            {
+                ModelState.AddModelError("ChuDe", "Chủ đề không được chứa ký tự đặc biệt hoặc số.");
+            }
+
+            // Kiểm tra nếu ngày bắt đầu nhỏ hơn ngày hiện tại
+            if (lichKham.BatDau < DateTime.Now)
+            {
+                ModelState.AddModelError("BatDau", "Ngày bắt đầu phải lớn hơn ngày hiện tại.");
+            }
+
+            // Kiểm tra nếu ngày bắt đầu trùng với ngày bắt đầu của lịch đã tạo
+            var existingLichKham = db.LichKhams.FirstOrDefault(l => l.BatDau == lichKham.BatDau);
+            if (existingLichKham != null)
+            {
+                ModelState.AddModelError("BatDau", "Ngày này đã được tạo rồi.");
+            }
+
             if (ModelState.IsValid)
             {
                 lichKham.TrangThai = 0;
@@ -189,6 +223,7 @@ namespace Healthhub_Online.Controllers
             ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "HoTen", lichKham.IDQuanTri);
             return View(lichKham);
         }
+
 
         // GET: Lichkham/Edit/5
         public ActionResult Edit(int? id)
