@@ -152,7 +152,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HoiDapsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\KhoasController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LichKhamsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NguoiDungsController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanTrisController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SolieucovidsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TintucsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TrungTamGanNhatsController.cs" />
     <Compile Include="Controllers\BacsiController.cs" />
     <Compile Include="Controllers\HoidapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1252,9 +1261,49 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Nguoidung\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\QuanTris\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanTris\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanTris\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanTris\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanTris\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDungs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDungs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDungs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDungs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDungs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HoiDaps\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HoiDaps\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\HoiDaps\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\HoiDaps\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\HoiDaps\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Khoas\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Khoas\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Khoas\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Khoas\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Khoas\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\LichKhams\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\LichKhams\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\LichKhams\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\LichKhams\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\LichKhams\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Solieucovids\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Solieucovids\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Solieucovids\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Solieucovids\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Solieucovids\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Tintucs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tintucs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Tintucs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Tintucs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Tintucs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\TrungTamGanNhats\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TrungTamGanNhats\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\TrungTamGanNhats\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TrungTamGanNhats\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TrungTamGanNhats\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1410,7 +1459,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\QuanTris\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>

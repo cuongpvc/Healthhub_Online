@@ -11,112 +11,107 @@ using Healthhub_Online.Models;
 
 namespace Healthhub_Online.Areas.Admin.Controllers
 {
-    public class QuanTrisController : Controller
+    public class KhoasController : Controller
     {
         private ModelWeb db = new ModelWeb();
 
-        // GET: Admin/QuanTris
+        // GET: Admin/Khoas
         public ActionResult Index()
         {
-            var quanTris = db.QuanTris.Include(q => q.Khoa);
-            return View(quanTris.ToList());
+            return View(db.Khoas.ToList());
         }
 
-        // GET: Admin/QuanTris/Details/5
+        // GET: Admin/Khoas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            Khoa khoa = db.Khoas.Find(id);
+            if (khoa == null)
             {
                 return HttpNotFound();
             }
-            return View(quanTri);
+            return View(khoa);
         }
 
-        // GET: Admin/QuanTris/Create
+        // GET: Admin/Khoas/Create
         public ActionResult Create()
         {
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa");
             return View();
         }
 
-        // POST: Admin/QuanTris/Create
+        // POST: Admin/Khoas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDQuanTri,TaiKhoan,MatKhau,VaiTro,ThongTinBacSi,TrinhDo,IDKhoa,HoTen,AnhBia")] QuanTri quanTri)
+        public ActionResult Create([Bind(Include = "IDKhoa,TenKhoa,MoTa")] Khoa khoa)
         {
             if (ModelState.IsValid)
             {
-                db.QuanTris.Add(quanTri);
+                db.Khoas.Add(khoa);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            return View(khoa);
         }
 
-        // GET: Admin/QuanTris/Edit/5
+        // GET: Admin/Khoas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            Khoa khoa = db.Khoas.Find(id);
+            if (khoa == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            return View(khoa);
         }
 
-        // POST: Admin/QuanTris/Edit/5
+        // POST: Admin/Khoas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDQuanTri,TaiKhoan,MatKhau,VaiTro,ThongTinBacSi,TrinhDo,IDKhoa,HoTen,AnhBia")] QuanTri quanTri)
+        public ActionResult Edit([Bind(Include = "IDKhoa,TenKhoa,MoTa")] Khoa khoa)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(quanTri).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(khoa).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            return View(khoa);
         }
 
-        // GET: Admin/QuanTris/Delete/5
+        // GET: Admin/Khoas/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            Khoa khoa = db.Khoas.Find(id);
+            if (khoa == null)
             {
                 return HttpNotFound();
             }
-            return View(quanTri);
+            return View(khoa);
         }
 
-        // POST: Admin/QuanTris/Delete/5
+        // POST: Admin/Khoas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuanTri quanTri = db.QuanTris.Find(id);
-            db.QuanTris.Remove(quanTri);
+            Khoa khoa = db.Khoas.Find(id);
+            db.Khoas.Remove(khoa);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

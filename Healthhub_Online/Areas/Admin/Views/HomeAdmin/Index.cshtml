@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using Healthhub_Online.Models
+@{
+    var u = Session["userAdmin"] as Healthhub_Online.Models.QuanTri;
+}
+<br />
+@{
+    if (u != null)
+    {
+        <h3>Trang quản lý Admin</h3>
+        <br />
+        <center><img src="~/images/images/corona.jpg" /></center>
+    }
+    else
+    {
+        <h3> <a href="/Home/Dangnhap">Đăng nhập ngay </a> </h3>
+    }
+
+
+
+}
+
+
+

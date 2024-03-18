@@ -11,112 +11,114 @@ using Healthhub_Online.Models;
 
 namespace Healthhub_Online.Areas.Admin.Controllers
 {
-    public class QuanTrisController : Controller
+    public class TrungTamGanNhatsController : Controller
     {
         private ModelWeb db = new ModelWeb();
 
-        // GET: Admin/QuanTris
+        // GET: Admin/TrungTamGanNhats
         public ActionResult Index()
         {
-            var quanTris = db.QuanTris.Include(q => q.Khoa);
-            return View(quanTris.ToList());
+            var trungTamGanNhats = db.TrungTamGanNhats.Include(t => t.TinhThanh);
+            return View(trungTamGanNhats.ToList());
         }
 
-        // GET: Admin/QuanTris/Details/5
+        // GET: Admin/TrungTamGanNhats/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            TrungTamGanNhat trungTamGanNhat = db.TrungTamGanNhats.Find(id);
+            if (trungTamGanNhat == null)
             {
                 return HttpNotFound();
             }
-            return View(quanTri);
+            return View(trungTamGanNhat);
         }
 
-        // GET: Admin/QuanTris/Create
+        // GET: Admin/TrungTamGanNhats/Create
         public ActionResult Create()
         {
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa");
+            ViewBag.IDTinh = new SelectList(db.TinhThanhs, "IDTinh", "TenTinh");
             return View();
         }
 
-        // POST: Admin/QuanTris/Create
+        // POST: Admin/TrungTamGanNhats/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDQuanTri,TaiKhoan,MatKhau,VaiTro,ThongTinBacSi,TrinhDo,IDKhoa,HoTen,AnhBia")] QuanTri quanTri)
+        [ValidateInput(false)]
+        public ActionResult Create([Bind(Include = "IDTrungTam,TenTrungTam,Mota,IDTinh")] TrungTamGanNhat trungTamGanNhat)
         {
             if (ModelState.IsValid)
             {
-                db.QuanTris.Add(quanTri);
+                db.TrungTamGanNhats.Add(trungTamGanNhat);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            ViewBag.IDTinh = new SelectList(db.TinhThanhs, "IDTinh", "TenTinh", trungTamGanNhat.IDTinh);
+            return View(trungTamGanNhat);
         }
 
-        // GET: Admin/QuanTris/Edit/5
+        // GET: Admin/TrungTamGanNhats/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            TrungTamGanNhat trungTamGanNhat = db.TrungTamGanNhats.Find(id);
+            if (trungTamGanNhat == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            ViewBag.IDTinh = new SelectList(db.TinhThanhs, "IDTinh", "TenTinh", trungTamGanNhat.IDTinh);
+            return View(trungTamGanNhat);
         }
 
-        // POST: Admin/QuanTris/Edit/5
+        // POST: Admin/TrungTamGanNhats/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDQuanTri,TaiKhoan,MatKhau,VaiTro,ThongTinBacSi,TrinhDo,IDKhoa,HoTen,AnhBia")] QuanTri quanTri)
+        [ValidateInput(false)]
+        public ActionResult Edit([Bind(Include = "IDTrungTam,TenTrungTam,Mota,IDTinh")] TrungTamGanNhat trungTamGanNhat)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(quanTri).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(trungTamGanNhat).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            ViewBag.IDTinh = new SelectList(db.TinhThanhs, "IDTinh", "TenTinh", trungTamGanNhat.IDTinh);
+            return View(trungTamGanNhat);
         }
 
-        // GET: Admin/QuanTris/Delete/5
+        // GET: Admin/TrungTamGanNhats/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            TrungTamGanNhat trungTamGanNhat = db.TrungTamGanNhats.Find(id);
+            if (trungTamGanNhat == null)
             {
                 return HttpNotFound();
             }
-            return View(quanTri);
+            return View(trungTamGanNhat);
         }
 
-        // POST: Admin/QuanTris/Delete/5
+        // POST: Admin/TrungTamGanNhats/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuanTri quanTri = db.QuanTris.Find(id);
-            db.QuanTris.Remove(quanTri);
+            TrungTamGanNhat trungTamGanNhat = db.TrungTamGanNhats.Find(id);
+            db.TrungTamGanNhats.Remove(trungTamGanNhat);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
