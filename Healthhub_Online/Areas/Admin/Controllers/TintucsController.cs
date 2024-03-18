@@ -11,112 +11,111 @@ using Healthhub_Online.Models;
 
 namespace Healthhub_Online.Areas.Admin.Controllers
 {
-    public class QuanTrisController : Controller
+    public class TintucsController : Controller
     {
         private ModelWeb db = new ModelWeb();
 
-        // GET: Admin/QuanTris
+        // GET: Admin/Tintucs
         public ActionResult Index()
         {
-            var quanTris = db.QuanTris.Include(q => q.Khoa);
-            return View(quanTris.ToList());
+            return View(db.Tintucs.ToList());
         }
 
-        // GET: Admin/QuanTris/Details/5
+        // GET: Admin/Tintucs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            Tintuc tintuc = db.Tintucs.Find(id);
+            if (tintuc == null)
             {
                 return HttpNotFound();
             }
-            return View(quanTri);
+            return View(tintuc);
         }
 
-        // GET: Admin/QuanTris/Create
+        // GET: Admin/Tintucs/Create
         public ActionResult Create()
         {
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa");
             return View();
         }
 
-        // POST: Admin/QuanTris/Create
+        // POST: Admin/Tintucs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDQuanTri,TaiKhoan,MatKhau,VaiTro,ThongTinBacSi,TrinhDo,IDKhoa,HoTen,AnhBia")] QuanTri quanTri)
+        [ValidateInput(false)]
+        public ActionResult Create([Bind(Include = "IDTintuc,Tieude,Noidung,Hinhanh,Mota,Ngaydang,TheLoai")] Tintuc tintuc)
         {
             if (ModelState.IsValid)
             {
-                db.QuanTris.Add(quanTri);
+                var d = DateTime.Now;
+                tintuc.Ngaydang = d;
+                db.Tintucs.Add(tintuc);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            return View(tintuc);
         }
 
-        // GET: Admin/QuanTris/Edit/5
+        // GET: Admin/Tintucs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            Tintuc tintuc = db.Tintucs.Find(id);
+            if (tintuc == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            return View(tintuc);
         }
 
-        // POST: Admin/QuanTris/Edit/5
+        // POST: Admin/Tintucs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDQuanTri,TaiKhoan,MatKhau,VaiTro,ThongTinBacSi,TrinhDo,IDKhoa,HoTen,AnhBia")] QuanTri quanTri)
+        [ValidateInput(false)]
+        public ActionResult Edit([Bind(Include = "IDTintuc,Tieude,Noidung,Hinhanh,Mota,Ngaydang,TheLoai")] Tintuc tintuc)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(quanTri).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(tintuc).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            return View(tintuc);
         }
 
-        // GET: Admin/QuanTris/Delete/5
+        // GET: Admin/Tintucs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            Tintuc tintuc = db.Tintucs.Find(id);
+            if (tintuc == null)
             {
                 return HttpNotFound();
             }
-            return View(quanTri);
+            return View(tintuc);
         }
 
-        // POST: Admin/QuanTris/Delete/5
+        // POST: Admin/Tintucs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuanTri quanTri = db.QuanTris.Find(id);
-            db.QuanTris.Remove(quanTri);
+            Tintuc tintuc = db.Tintucs.Find(id);
+            db.Tintucs.Remove(tintuc);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

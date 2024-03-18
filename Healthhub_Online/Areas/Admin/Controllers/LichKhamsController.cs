@@ -11,112 +11,116 @@ using Healthhub_Online.Models;
 
 namespace Healthhub_Online.Areas.Admin.Controllers
 {
-    public class QuanTrisController : Controller
+    public class LichKhamsController : Controller
     {
         private ModelWeb db = new ModelWeb();
 
-        // GET: Admin/QuanTris
+        // GET: Admin/LichKhams
         public ActionResult Index()
         {
-            var quanTris = db.QuanTris.Include(q => q.Khoa);
-            return View(quanTris.ToList());
+            var lichKhams = db.LichKhams.Include(l => l.NguoiDung).Include(l => l.QuanTri);
+            return View(lichKhams.ToList());
         }
 
-        // GET: Admin/QuanTris/Details/5
+        // GET: Admin/LichKhams/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            LichKham lichKham = db.LichKhams.Find(id);
+            if (lichKham == null)
             {
                 return HttpNotFound();
             }
-            return View(quanTri);
+            return View(lichKham);
         }
 
-        // GET: Admin/QuanTris/Create
+        // GET: Admin/LichKhams/Create
         public ActionResult Create()
         {
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa");
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen");
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan");
             return View();
         }
 
-        // POST: Admin/QuanTris/Create
+        // POST: Admin/LichKhams/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDQuanTri,TaiKhoan,MatKhau,VaiTro,ThongTinBacSi,TrinhDo,IDKhoa,HoTen,AnhBia")] QuanTri quanTri)
+        public ActionResult Create([Bind(Include = "IDLichKham,ChuDe,MoTa,BatDau,KetThuc,TrangThai,ZoomInfo,KetQuaKham,IDNguoiDung,IDQuanTri")] LichKham lichKham)
         {
             if (ModelState.IsValid)
             {
-                db.QuanTris.Add(quanTri);
+                db.LichKhams.Add(lichKham);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", lichKham.IDNguoiDung);
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan", lichKham.IDQuanTri);
+            return View(lichKham);
         }
 
-        // GET: Admin/QuanTris/Edit/5
+        // GET: Admin/LichKhams/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            LichKham lichKham = db.LichKhams.Find(id);
+            if (lichKham == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", lichKham.IDNguoiDung);
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan", lichKham.IDQuanTri);
+            return View(lichKham);
         }
 
-        // POST: Admin/QuanTris/Edit/5
+        // POST: Admin/LichKhams/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDQuanTri,TaiKhoan,MatKhau,VaiTro,ThongTinBacSi,TrinhDo,IDKhoa,HoTen,AnhBia")] QuanTri quanTri)
+        public ActionResult Edit([Bind(Include = "IDLichKham,ChuDe,MoTa,BatDau,KetThuc,TrangThai,ZoomInfo,KetQuaKham,IDNguoiDung,IDQuanTri")] LichKham lichKham)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(quanTri).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(lichKham).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", lichKham.IDNguoiDung);
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan", lichKham.IDQuanTri);
+            return View(lichKham);
         }
 
-        // GET: Admin/QuanTris/Delete/5
+        // GET: Admin/LichKhams/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            LichKham lichKham = db.LichKhams.Find(id);
+            if (lichKham == null)
             {
                 return HttpNotFound();
             }
-            return View(quanTri);
+            return View(lichKham);
         }
 
-        // POST: Admin/QuanTris/Delete/5
+        // POST: Admin/LichKhams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuanTri quanTri = db.QuanTris.Find(id);
-            db.QuanTris.Remove(quanTri);
+            LichKham lichKham = db.LichKhams.Find(id);
+            db.LichKhams.Remove(lichKham);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

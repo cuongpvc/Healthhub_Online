@@ -11,112 +11,119 @@ using Healthhub_Online.Models;
 
 namespace Healthhub_Online.Areas.Admin.Controllers
 {
-    public class QuanTrisController : Controller
+    public class HoiDapsController : Controller
     {
         private ModelWeb db = new ModelWeb();
 
-        // GET: Admin/QuanTris
+        // GET: Admin/HoiDaps
         public ActionResult Index()
         {
-            var quanTris = db.QuanTris.Include(q => q.Khoa);
-            return View(quanTris.ToList());
+            var hoiDaps = db.HoiDaps.Include(h => h.NguoiDung).Include(h => h.QuanTri);
+            return View(hoiDaps.ToList());
         }
 
-        // GET: Admin/QuanTris/Details/5
+        // GET: Admin/HoiDaps/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            HoiDap hoiDap = db.HoiDaps.Find(id);
+            if (hoiDap == null)
             {
                 return HttpNotFound();
             }
-            return View(quanTri);
+            return View(hoiDap);
         }
 
-        // GET: Admin/QuanTris/Create
+        // GET: Admin/HoiDaps/Create
         public ActionResult Create()
         {
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa");
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen");
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan");
             return View();
         }
 
-        // POST: Admin/QuanTris/Create
+        // POST: Admin/HoiDaps/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDQuanTri,TaiKhoan,MatKhau,VaiTro,ThongTinBacSi,TrinhDo,IDKhoa,HoTen,AnhBia")] QuanTri quanTri)
+        public ActionResult Create([Bind(Include = "IDHoidap,CauHoi,TraLoi,IDNguoiDung,IDQuanTri,NgayGui,GhiChu,TrangThai")] HoiDap hoiDap)
         {
             if (ModelState.IsValid)
             {
-                db.QuanTris.Add(quanTri);
+                var d = DateTime.Now;
+                hoiDap.NgayGui = d;
+
+                db.HoiDaps.Add(hoiDap);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", hoiDap.IDNguoiDung);
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan", hoiDap.IDQuanTri);
+            return View(hoiDap);
         }
 
-        // GET: Admin/QuanTris/Edit/5
+        // GET: Admin/HoiDaps/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            HoiDap hoiDap = db.HoiDaps.Find(id);
+            if (hoiDap == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", hoiDap.IDNguoiDung);
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan", hoiDap.IDQuanTri);
+            return View(hoiDap);
         }
 
-        // POST: Admin/QuanTris/Edit/5
+        // POST: Admin/HoiDaps/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDQuanTri,TaiKhoan,MatKhau,VaiTro,ThongTinBacSi,TrinhDo,IDKhoa,HoTen,AnhBia")] QuanTri quanTri)
+        public ActionResult Edit([Bind(Include = "IDHoidap,CauHoi,TraLoi,IDNguoiDung,IDQuanTri,NgayGui,GhiChu,TrangThai")] HoiDap hoiDap)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(quanTri).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(hoiDap).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDKhoa = new SelectList(db.Khoas, "IDKhoa", "TenKhoa", quanTri.IDKhoa);
-            return View(quanTri);
+            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", hoiDap.IDNguoiDung);
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan", hoiDap.IDQuanTri);
+            return View(hoiDap);
         }
 
-        // GET: Admin/QuanTris/Delete/5
+        // GET: Admin/HoiDaps/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
-            if (quanTri == null)
+            HoiDap hoiDap = db.HoiDaps.Find(id);
+            if (hoiDap == null)
             {
                 return HttpNotFound();
             }
-            return View(quanTri);
+            return View(hoiDap);
         }
 
-        // POST: Admin/QuanTris/Delete/5
+        // POST: Admin/HoiDaps/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuanTri quanTri = db.QuanTris.Find(id);
-            db.QuanTris.Remove(quanTri);
+            HoiDap hoiDap = db.HoiDaps.Find(id);
+            db.HoiDaps.Remove(hoiDap);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -180,14 +180,14 @@ namespace Healthhub_Online.Controllers
             {
 
                 Session["user"] = nguoiDung;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Details", "Nguoidung", new { id = nguoiDung.IDNguoiDung });
             }
             else if (quanTri != null)
             {
                 if (quanTri.VaiTro == 1)
                 {
                     Session["admin"] = quanTri;
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("QuanTris", "Admin");
                 }
                 else
                 {
