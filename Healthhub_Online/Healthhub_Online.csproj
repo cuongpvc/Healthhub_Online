@@ -1458,6 +1458,11 @@
     <Content Include="Views\Home\Xemchitiet.cshtml" />
     <Content Include="Views\Lichkham\Benhan.cshtml" />
     <Content Include="Views\Bacsi\Guibenhan.cshtml" />
+    <Content Include="Views\Hoidap\Cauhoichoxuly.cshtml" />
+    <Content Include="Views\Hoidap\Create.cshtml" />
+    <Content Include="Views\Hoidap\ListAll.cshtml" />
+    <Content Include="Views\Bacsi\Quanlyhoidap.cshtml" />
+    <Content Include="Views\Bacsi\Traloicauhoi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
