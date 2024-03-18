@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-@model IEnumerable<Healthhub_Online.Models.Solieucovid>
+@model IEnumerable<Healthhub_Online.Models.Solieudichbenh>
 <style type="text/css">
     th {
         text-align: center;
@@ -32,14 +32,17 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Quocgia)
                 </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Nam)
+                </th>
+                <th class="bg-info">
+                    @Html.DisplayNameFor(model => model.Dichbenh)
+                </th>
                 <th class="bg-danger">
-                    @Html.DisplayNameFor(model => model.Socanhiem)
+                    @Html.DisplayNameFor(model => model.Canhiem)
                 </th>
-                <th class="bg-warning">
-                    @Html.DisplayNameFor(model => model.Dangdieutri)
-                </th>
-                <th class="bg-success">
-                    @Html.DisplayNameFor(model => model.Khoi)
+
                 </th>
                 <th class="bg-info">
                     @Html.DisplayNameFor(model => model.Tuvong)
@@ -55,13 +58,13 @@
                         <b>@Html.DisplayFor(modelItem => item.Quocgia)</b>
                     </td>
                     <td style="color:red">
-                        @Html.DisplayFor(modelItem => item.Socanhiem)
+                        @Html.DisplayFor(modelItem => item.Nam)
                     </td>
                     <td style="color: gold">
-                        @Html.DisplayFor(modelItem => item.Dangdieutri)
+                        @Html.DisplayFor(modelItem => item.Dichbenh)
                     </td>
                     <td style="color: aqua">
-                        @Html.DisplayFor(modelItem => item.Khoi)
+                        @Html.DisplayFor(modelItem => item.Canhiem)
                     </td>
                     <td class="text-info">
                         @Html.DisplayFor(modelItem => item.Tuvong)

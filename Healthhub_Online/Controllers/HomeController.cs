@@ -20,7 +20,7 @@ namespace Healthhub_Online.Controllers
         private ModelWeb db = new ModelWeb();
         public ActionResult Index()
         {
-            var solieu = db.Solieucovids.ToList();
+            var solieu = db.Solieudichbenh.ToList();
             return View(solieu);
         }
 

@@ -7,23 +7,20 @@ namespace Healthhub_Online.Models
     using System.Data.Entity.Spatial;
 
     [Table("Solieucovid")]
-    public partial class Solieucovid
+    public partial class Solieudichbenh
     {
         [Key]
-        public int IDThongkecovid { get; set; }
+        public int IDThongke { get; set; }
 
         [StringLength(50)]
         public string Quocgia { get; set; }
+        public int? Nam { get; set; }
 
-        public int? Socanhiem { get; set; }
-
-        public int? Dangdieutri { get; set; }
-
-        public int? Khoi { get; set; }
-
+        [StringLength(50)]
+        public string Dichbenh { get; set; }
+        public int? Canhiem { get; set; }
         public int? Tuvong { get; set; }
 
-        [StringLength(10)]
-        public string Ghichu { get; set; }
+       
     }
 }
