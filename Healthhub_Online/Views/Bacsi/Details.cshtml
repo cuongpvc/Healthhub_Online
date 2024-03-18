@@ -4,80 +4,56 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    var userBS = Session["userBS"] as Healthhub_Online.Models.QuanTri;
+}
+<h2>Hồ sơ cá nhân</h2>
+<br />
+<div class="">
+    <div class="col-md-6">
 
-<h2>Details</h2>
+        <img class="imgavt" src=@Model.AnhBia width="170" height="170" />
+        &nbsp;
+        <div class="divInfo">
+            <b> @Html.DisplayFor(model => model.HoTen)</b>
+            <br />
+            Khoa: @Html.DisplayFor(model => model.Khoa.TenKhoa)
+            <br />
 
-<div>
-    <h4>QuanTri</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Khoa.TenKhoa)
-        </dt>
+            Trình độ : @Html.DisplayFor(model => model.TrinhDo)
 
-        <dd>
-            @Html.DisplayFor(model => model.Khoa.TenKhoa)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TaiKhoan)
-        </dt>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.TaiKhoan)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MatKhau)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MatKhau)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VaiTro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VaiTro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ThongTinBacSi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ThongTinBacSi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TrinhDo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TrinhDo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HoTen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HoTen)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AnhBia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AnhBia)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IDQuanTri }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<br />
+<h4>Đánh giá từ người dùng</h4>
+<hr />  
+@if (ViewBag.Feedback != null && ViewBag.Feedback.Count > 0)
+{
+    <ul>
+        @foreach (var feedback in ViewBag.Feedback)
+        {
+            <li>
+                <strong>@feedback.DanhGiaChatLuong.DanhGiaChatLuong1:</strong> @feedback.NoiDung
+                <br />
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No feedback available.</p>
+}
+</div>
+@{
+    if (userBS != null)
+    {
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.IDQuanTri }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+}

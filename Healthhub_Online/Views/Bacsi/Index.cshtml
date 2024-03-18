@@ -21,7 +21,7 @@
 
             <img class="imgavt" src="https://lh3.googleusercontent.com/Rj0xNHii1Olg2gDfe6uND3RBB3YWea44Lz3umPB0JkElMOyTrVHNXYLzRgtGlkfAA44" width="160" height="160" style="float:left" />
             <br />
-            <b>Họ và tên: @item.HoTen</b>
+            <li><a href="@Url.Action("Details", "Bacsi", new {id = item.IDQuanTri})">@item.HoTen</a></li>
             <h4>Trình độ: @item.TrinhDo</h4>
             <h4>Khoa: @item.Khoa.TenKhoa</h4>
             <h4>Thông tin khác : @item.ThongTinBacSi</h4>

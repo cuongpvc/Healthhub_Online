@@ -16,17 +16,17 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.IDNguoiDung)
     <div class="form-group">
-        <label class="control-label col-md-2">Current Picture</label>
+        <label class="control-label col-md-2">Ảnh Hiện Tại</label>
         <div class="col-md-10">
             <img src="@Model.AnhDaiDien" width="170" height="170"  />
         </div>
     </div>
     <div class="form-group">
-        @Html.Label("ProfilePicture", "Change Picture", new { @class = "control-label col-md-2" })
+        @Html.Label("ProfilePicture", "Đổi Ảnh Đại Diện", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <input type="file" id="ProfilePicture" name="ProfilePicture" accept="image/*" onchange="convertToBase64();" />
             <div id="previewContainer" style="margin-top: 10px;">
-                <img id="imagePreview" src="#" alt="Avatar Preview" style="height: 100px; display: none;" />
+                <img id="imagePreview" src="#" alt="Ảnh Mới" style="height: 100px; display: none;" />
             </div>
             <input type="hidden" id="AnhDaiDien" name="AnhDaiDien" />
         </div>
