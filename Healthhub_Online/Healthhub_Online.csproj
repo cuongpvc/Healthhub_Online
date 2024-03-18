@@ -1410,6 +1410,7 @@
     <Content Include="Views\Home\TintucNewPartial.cshtml" />
     <Content Include="Views\Home\Trangchu.cshtml" />
     <Content Include="Views\Home\Xemchitiet.cshtml" />
+    <Content Include="Views\Trungtamyte\TraCuu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
