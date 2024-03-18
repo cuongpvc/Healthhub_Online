@@ -13,7 +13,6 @@ namespace Healthhub_Online.Models
         public TinhThanh()
         {
             NguoiDungs = new HashSet<NguoiDung>();
-          
         }
 
         [Key]
@@ -24,8 +23,5 @@ namespace Healthhub_Online.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NguoiDung> NguoiDungs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        
     }
 }

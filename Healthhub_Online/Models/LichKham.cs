@@ -12,7 +12,6 @@ namespace Healthhub_Online.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LichKham()
         {
-            
             DanhGias = new HashSet<DanhGia>();
         }
 
@@ -44,13 +43,10 @@ namespace Healthhub_Online.Models
         public int? IDQuanTri { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-       
+        public virtual ICollection<DanhGia> DanhGias { get; set; }
 
         public virtual NguoiDung NguoiDung { get; set; }
 
         public virtual QuanTri QuanTri { get; set; }
-
-        public virtual ICollection<DanhGia> DanhGias { get; set; }
-
     }
 }

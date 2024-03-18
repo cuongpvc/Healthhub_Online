@@ -161,7 +161,6 @@
     <Compile Include="Areas\Admin\Controllers\QuanTrisController.cs" />
     <Compile Include="Areas\Admin\Controllers\SolieucovidsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TintucsController.cs" />
-    <Compile Include="Areas\Admin\Controllers\TrungTamGanNhatsController.cs" />
     <Compile Include="Controllers\BacsiController.cs" />
     <Compile Include="Controllers\HoidapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1462,7 +1461,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\QuanTris\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>

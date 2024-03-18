@@ -9,7 +9,6 @@ namespace Healthhub_Online.Models
     [Table("DanhGia")]
     public partial class DanhGia
     {
-       
         [Key]
         public int IDDanhGia { get; set; }
 
@@ -25,9 +24,10 @@ namespace Healthhub_Online.Models
 
         public virtual DanhGiaChatLuong DanhGiaChatLuong { get; set; }
 
+        public virtual LichKham LichKham { get; set; }
+
         public virtual NguoiDung NguoiDung { get; set; }
 
         public virtual QuanTri QuanTri { get; set; }
-        public virtual LichKham LichKham { get; set; }
     }
 }
