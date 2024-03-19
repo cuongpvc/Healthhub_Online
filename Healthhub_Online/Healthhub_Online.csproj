@@ -1463,6 +1463,7 @@
     <Content Include="Views\Hoidap\ListAll.cshtml" />
     <Content Include="Views\Bacsi\Quanlyhoidap.cshtml" />
     <Content Include="Views\Bacsi\Traloicauhoi.cshtml" />
+    <Content Include="Views\Home\TraCuu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
