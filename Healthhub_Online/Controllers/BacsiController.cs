@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -179,11 +180,50 @@ namespace Healthhub_Online.Controllers
         // GET: Bacsi/Guibenhan
         public ActionResult Guibenhan(int id)
         {
-            if (page == null) page = 1;
-            var hoiDaps = db.HoiDaps.Include(h => h.NguoiDung).Include(h => h.QuanTri).Where(n => n.TrangThai == 0).OrderByDescending(a => a.NgayGui).ThenBy(a => a.IDHoidap).ToList();
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-            return View(hoiDaps.ToPagedList(pageNumber, pageSize));
+            LichKham lichKham = db.LichKhams.Find(id);
+            if (lichKham == null)
+            {
+                return HttpNotFound();
+            }
+            return View(lichKham);
+        }
+
+        // POST: Bacsi/Guibenhan
+        [HttpPost]
+        public ActionResult Guibenhan(int id, HttpPostedFileBase file)
+        {
+            LichKham lichKham = db.LichKhams.Find(id);
+            if (lichKham == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (file != null && file.ContentLength > 0)
+            {
+                try
+                {
+                    // Lưu file vào thư mục trên server
+                    string fileName = Path.GetFileName(file.FileName);
+                    string path = Path.Combine(Server.MapPath("~/UploadedFiles"), fileName);
+                    file.SaveAs(path);
+
+                    // Lưu tên file vào trường KetQuaKham của LichKham
+                    lichKham.KetQuaKham = fileName;
+                    db.SaveChanges();
+
+                    ViewBag.Message = "File đã được lưu thành công.";
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "Lỗi: " + ex.Message;
+                }
+            }
+            else
+            {
+                ViewBag.Message = "Vui lòng chọn file.";
+            }
+
+            return RedirectToAction("Lichdatuvan", "Bacsi");
         }
 
         public ActionResult ListAll(int? page)
