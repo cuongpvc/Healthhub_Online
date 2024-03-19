@@ -370,6 +370,11 @@ namespace Healthhub_Online.Controllers
             }
             return View(chitiet);
         }
+        [HttpGet]
+        public ActionResult TraCuu()
+        {
+            return View();
+        }
     }
    
 
