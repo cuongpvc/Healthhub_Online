@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "lichhen";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var u = Session["user"] as Healthhub_Online.Models.NguoiDung;
+    var u = Session["userBS"] as Healthhub_Online.Models.QuanTri;
 }
 
 @section scripts{
@@ -20,7 +20,7 @@
                 editable: false,
                 allDaySlot: false,
                 selectable: true,
-                events: "/Lichkham/Lichdangluoi/"
+                events: "/Bacsi/Lichdangluoi/"
             });
         });
     </script>
@@ -34,11 +34,13 @@
     <div class="col-md-8">
         <h2>Lịch khám của bạn</h2>
         <button>
-            @Html.ActionLink("Đặt mới", "Create")
+            @Html.ActionLink("Xác nhận lịch", "Lichdangcho")
         </button>
 
-        <a href="@Url.Action("Index", "LichKham", new { id = u.IDNguoiDung  })">Xem dạng danh sách</a>
 
+        <button>
+            @Html.ActionLink("Xem dạng danh sách", "Lichdaxacnhan")
+        </button>
 
         <div id="calendar" style="margin-top:50px"></div>
     </div>

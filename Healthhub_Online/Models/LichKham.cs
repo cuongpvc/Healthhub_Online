@@ -1,4 +1,4 @@
-namespace Healthhub_Online.Models
+﻿namespace Healthhub_Online.Models
 {
     using System;
     using System.Collections.Generic;
@@ -37,9 +37,9 @@ namespace Healthhub_Online.Models
 
         [StringLength(200)]
         public string KetQuaKham { get; set; }
-
+        [Display(Name = "Người dùng")]
         public int? IDNguoiDung { get; set; }
-
+        [Display(Name = "Bác sĩ")]
         public int? IDQuanTri { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
