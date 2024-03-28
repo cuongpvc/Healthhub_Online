@@ -1432,7 +1432,7 @@
     <Content Include="Views\Lichkham\Datuvanxong.cshtml" />
     <Content Include="Views\Lichkham\Lichdangluoi.cshtml" />
     <Content Include="Views\Lichkham\lichhen.cshtml" />
-    <Content Include="Views\Bacsi\Kiemtralichhen.cshtml" />
+    <Content Include="Views\Bacsi\Lichdatuvan.cshtml" />
     <Content Include="Views\Bacsi\Lichdangcho.cshtml" />
     <Content Include="Views\Bacsi\Lichdaxacnhan.cshtml" />
     <Content Include="Views\Bacsi\Xacnhanlichhen.cshtml" />
@@ -1449,10 +1449,22 @@
     <Content Include="Views\Home\Quenmatkhau.cshtml" />
     <Content Include="Views\Home\VerifyOTP.cshtml" />
     <Content Include="Views\Home\VerifyOTPForgotPassword.cshtml" />
-    <Content Include="Views\Trungtamyte\TraCuu.cshtml" />
+    <Content Include="Views\Home\TintucHotPartial.cshtml" />
+    <Content Include="Views\Home\TintucNewPartial.cshtml" />
+    <Content Include="Views\Home\Trangchu.cshtml" />
+    <Content Include="Views\Home\Xemchitiet.cshtml" />
+    <Content Include="Views\Lichkham\Benhan.cshtml" />
+    <Content Include="Views\Bacsi\Guibenhan.cshtml" />
+    <Content Include="Views\Hoidap\Cauhoichoxuly.cshtml" />
+    <Content Include="Views\Hoidap\Create.cshtml" />
+    <Content Include="Views\Hoidap\ListAll.cshtml" />
+    <Content Include="Views\Bacsi\Quanlyhoidap.cshtml" />
+    <Content Include="Views\Bacsi\Traloicauhoi.cshtml" />
+    <Content Include="Views\Home\TraCuu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>

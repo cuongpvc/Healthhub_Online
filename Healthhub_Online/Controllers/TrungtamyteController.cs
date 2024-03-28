@@ -11,17 +11,13 @@ namespace Healthhub_Online.Controllers
 {
     public class TrungtamyteController : Controller
     {
+        ModelWeb db = new ModelWeb();
         [HttpGet]
         public ActionResult TraCuu()
         {
-            if (Session["user"] != null) { 
-                var user = (NguoiDung)Session["user"];
-                return View((Object)user.DiaChiCuThe);
-            }            
-                    
             return View();
         }
-       
+
 
     }
 

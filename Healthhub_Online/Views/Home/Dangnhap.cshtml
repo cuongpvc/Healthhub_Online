@@ -17,39 +17,66 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="panel-body">
+                <h2 style="text-align:center">Đăng Nhập</h2>
+                @using (Html.BeginForm("Dangnhap", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+                    <div class="form-group">
+                        @Html.Label("Tên đăng nhập", new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.TextBox("username", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Mật khẩu", new { @class = "control-label col-md-3" })
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                @Html.Password("password", null, new { @class = "form-control", id = "passwordField" })
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" id="togglePasswordField">
+                                        <span id="eyeIcon" class="glyphicon glyphicon-eye-open"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            @Html.ValidationMessage("dangnhapsai", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                        </div>
+                    </div>
+                }
                 <div class="form-group">
-                    @Html.Label("Tên đăng nhập ", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBox("username", null, new { @class = "form-control" })
+                    <div class="col-md-offset-3 col-md-9">
+                        Bạn chưa có tài khoản? <a href="@Url.Action("Dangky", "Home")">Đăng ký ngay</a>.
                     </div>
                 </div>
-
                 <div class="form-group">
-                    @Html.Label("Mật khẩu ", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.Password("password", null, new { @class = "form-control" })
-                        @Html.ValidationMessage("dangnhasai", "", new { @class = "text-danger" })
+                    <div class="col-md-offset-3 col-md-9">
+                        Quên mật khẩu? <a href="@Url.Action("Quenmatkhau", "Home")">Quên mật khẩu</a>.
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Đăng Nhập" class="btn btn-default" />
-                    </div>
-                </div>
-            }
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    Bạn chưa có tài khoản? <a href="@Url.Action("Dangky", "Home")">Đăng ký ngay</a>.
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    Quên mật khẩu ? <a href="@Url.Action("Quenmatkhau", "Home")">Quên mật khẩu </a>.
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById("togglePasswordField").addEventListener("click", function () {
+        var passwordField = document.getElementById("passwordField");
+        var eyeIcon = document.getElementById("eyeIcon");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            eyeIcon.className = "glyphicon glyphicon-eye-close";
+        } else {
+            passwordField.type = "password";
+            eyeIcon.className = "glyphicon glyphicon-eye-open";
+        }
+    });
+</script>

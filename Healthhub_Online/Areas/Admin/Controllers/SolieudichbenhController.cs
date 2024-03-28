@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Healthhub_Online.Models;
+
 
 namespace Healthhub_Online.Areas.Admin.Controllers
 {
@@ -21,7 +21,7 @@ namespace Healthhub_Online.Areas.Admin.Controllers
             return View(db.Solieudichbenhs.ToList());
         }
 
-        // GET: Admin/Solieucovids/Details/5
+        // GET: Admin/Solieudichbenh/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -29,25 +29,25 @@ namespace Healthhub_Online.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Solieudichbenh solieudichbenh = db.Solieudichbenhs.Find(id);
-            if (solieudichbenh  == null)
+            if (solieudichbenh == null)
             {
                 return HttpNotFound();
             }
             return View(solieudichbenh);
         }
 
-        // GET: Admin/Solieucovids/Create
+        // GET: Admin/Solieudichbenh/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Solieucovids/Create
+        // POST: Admin/Solieudichbenh/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDThongkecovid,Quocgia,Socanhiem,Dangdieutri,Khoi,Tuvong,Ghichu")] Solieudichbenh solieudichbenh)
+        public ActionResult Create([Bind(Include = "IDThongke,Quocgia,Nam,Dichbenh,Canhiem,Tuvong")] Solieudichbenh solieudichbenh)
         {
             if (ModelState.IsValid)
             {
@@ -59,27 +59,27 @@ namespace Healthhub_Online.Areas.Admin.Controllers
             return View(solieudichbenh);
         }
 
-        // GET: Admin/Solieucovids/Edit/5
+        // GET: Admin/Solieudichbenh/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Solieudichbenh solieucovid = db.Solieudichbenhs.Find(id);
-            if (solieucovid == null)
+            Solieudichbenh solieudichbenh = db.Solieudichbenhs.Find(id);
+            if (solieudichbenh == null)
             {
                 return HttpNotFound();
             }
-            return View(solieucovid);
+            return View(solieudichbenh);
         }
 
-        // POST: Admin/Solieucovids/Edit/5
+        // POST: Admin/Solieudichbenh/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDThongkecovid,Quocgia,Socanhiem,Dangdieutri,Khoi,Tuvong,Ghichu")] Solieudichbenh solieudichbenh)
+        public ActionResult Edit([Bind(Include = "IDThongke,Quocgia,Nam,Dichbenh,Canhiem,Tuvong")] Solieudichbenh solieudichbenh)
         {
             if (ModelState.IsValid)
             {
@@ -90,22 +90,22 @@ namespace Healthhub_Online.Areas.Admin.Controllers
             return View(solieudichbenh);
         }
 
-        // GET: Admin/Solieucovids/Delete/5
+        // GET: Admin/Solieudichbenh/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Solieudichbenh solieucovid = db.Solieudichbenhs.Find(id);
-            if (solieucovid == null)
+            Solieudichbenh solieudichbenh = db.Solieudichbenhs.Find(id);
+            if (solieudichbenh == null)
             {
                 return HttpNotFound();
             }
-            return View(solieucovid);
+            return View(solieudichbenh);
         }
 
-        // POST: Admin/Solieucovids/Delete/5
+        // POST: Admin/Solieudichbenh/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -20,7 +20,8 @@ namespace Healthhub_Online.Controllers
         private ModelWeb db = new ModelWeb();
         public ActionResult Index()
         {
-            return View();
+            var solieu = db.Solieudichbenhs.ToList();
+            return View(solieu);
         }
 
         public ActionResult Trangchu()
@@ -339,6 +340,47 @@ namespace Healthhub_Online.Controllers
             }
             ViewBag.Message = "Đặt lại mật khẩu thành công.";
             return RedirectToAction("Dangnhap", "Home");
+        }
+
+        public ActionResult DangXuatU()
+        {
+            Session["user"] = null;
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult DangXuatBs()
+        {
+            Session["userBS"] = null;
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult TintucNewPartial()
+        {
+            String n = "new";
+            var tintuc = db.Tintucs.Where(x => x.TheLoai.Equals(n));
+            return PartialView(tintuc);
+
+        }
+        public ActionResult TintucHotPartial()
+        {
+            String h = "hot";
+            var tintuc = db.Tintucs.Where(x => x.TheLoai.Equals(h));
+            return PartialView(tintuc);
+
+        }
+        public ActionResult Xemchitiet(int IDTintuc = 0)
+        {
+            var chitiet = db.Tintucs.SingleOrDefault(n => n.IDTintuc == IDTintuc);
+            if (chitiet == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(chitiet);
+        }
+        [HttpGet]
+        public ActionResult TraCuu()
+        {
+            return View();
         }
     }
    

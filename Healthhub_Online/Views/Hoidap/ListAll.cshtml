@@ -16,6 +16,7 @@
             @Html.ActionLink("Đăng nhập để gửi câu hỏi cho bác sĩ. ", "Dangnhap", "Home", null, new { @class = "MauchuMenu" })
         </button>
 
+
     }
 
 }
@@ -34,6 +35,5 @@
     Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("listAll",
-                new { page }))
+                    new { page }))
 </div>
-

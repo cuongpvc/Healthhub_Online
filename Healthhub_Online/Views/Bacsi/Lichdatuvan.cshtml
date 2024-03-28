@@ -13,7 +13,7 @@
 <h4>
     <a href="@Url.Action("Lichdangcho", "Bacsi", new { id = userBS.IDQuanTri  })">LỊCH CHƯA XÁC NHẬN</a>&nbsp;||
     <a href="@Url.Action("Lichdaxacnhan", "Bacsi", new { id = userBS.IDQuanTri  })">LỊCH ĐÃ XÁC NHẬN</a>&nbsp;||
-    <a href="@Url.Action("Kiemtralichhen", "Bacsi", new { id = userBS.IDQuanTri  })">TẤT CẢ LỊCH HẸN</a>&nbsp;||
+    <a href="@Url.Action("Lichdatuvan", "Bacsi", new { id = userBS.IDQuanTri  })">LỊCH ĐÃ TƯ VẤN XONG</a>&nbsp;||
     <a href="@Url.Action("KiemTraDanhGia", "Bacsi", new { id = userBS.IDQuanTri  })">KIỂM TRA ĐÁNH GIÁ</a>
 </h4>
 <br />
@@ -22,21 +22,16 @@
         <th>
             Người đặt lịch
         </th>
-        @*<th>
-                Bác sĩ tư vấn
-            </th>*@
         <th>
             Nội dung cần tư vấn
         </th>
-        @*<th>
-                Mô tả
-            </th>*@
+        
         <th>
             Hẹn vào lúc
         </th>
-        @*<th>
+        <th>
                 Kết thúc lúc
-            </th>*@
+            </th>
         <th>
             Trạng thái
         </th>
@@ -44,7 +39,7 @@
             Link ZOOM
         </th>
         <th>
-            Ghi chú tư vấn
+            File bệnh án
         </th>
         <th></th>
     </tr>
@@ -55,21 +50,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NguoiDung.HoTen)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.QuanTri.TaiKhoan)
-                </td>*@
+            
             <td>
                 @Html.DisplayFor(modelItem => item.ChuDe)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.MoTa)
-                </td>*@
+           
             <td>
                 @Html.DisplayFor(modelItem => item.BatDau)
             </td>
-            @*<td>
+            <td>
                     @Html.DisplayFor(modelItem => item.KetThuc)
-                </td>*@
+                </td>
             <td>
                 @{
                     if (@item.TrangThai == 0)
@@ -98,14 +89,14 @@
                 @Html.DisplayFor(modelItem => item.KetQuaKham)
             </td>
             <td>
-                <button class="">
-                    @Html.ActionLink("Xác nhận", "Xacnhanlichhen", new { id = item.IDLichKham })
-                </button>
+                
+                    <a href="@Url.Action("Guibenhan", "Bacsi", new { id = item.IDLichKham })" class="btn btn-primary">Bệnh Án</a>
+                
             </td>
         </tr>
     }
 </table>
     Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
-    @Html.PagedListPager(Model, page => Url.Action("Kiemtralichhen",
+    @Html.PagedListPager(Model, page => Url.Action("Lichdatuvan",
         new { page }))
