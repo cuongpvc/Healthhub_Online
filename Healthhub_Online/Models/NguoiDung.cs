@@ -1,4 +1,4 @@
-namespace Healthhub_Online.Models
+﻿namespace Healthhub_Online.Models
 {
     using System;
     using System.Collections.Generic;
@@ -19,13 +19,17 @@ namespace Healthhub_Online.Models
 
         [Key]
         public int IDNguoiDung { get; set; }
-
+        [Required(ErrorMessage = "Cần nhập họ tên")]
         public string HoTen { get; set; }
 
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Cần nhập Email")]
+        [EmailAddress(ErrorMessage = "Email không phù hợp")]
+        public string Email { get; set; }   
 
-        public string DienThoai { get; set; }
-
+        [Required(ErrorMessage = "Cần nhập số điện thoại")]
+        [Phone(ErrorMessage = "Số điện thoại không phù hợp")]
+        [RegularExpression(@"^\d{9,10}$", ErrorMessage = "Số điện thoại không phù hợp")]
+        public string DienThoai { get; set; }   
         public string TaiKhoan { get; set; }
 
         public string MatKhau { get; set; }
