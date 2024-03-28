@@ -6,15 +6,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h2 style="text-align: center">Đăng Nhập</h2>
-            @if (TempData["StatusMessage"] != null)
-            {
-                <div class="alert alert-danger">
-                    @TempData["StatusMessage"]
-                </div>
-            }
             <div class="panel-body">
                 <h2 style="text-align:center">Đăng Nhập</h2>
+                @if (TempData["StatusMessage"] != null)
+                {
+                    <div class="alert alert-danger">
+                        @TempData["StatusMessage"]
+                    </div>
+                }
                 @using (Html.BeginForm("Dangnhap", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
@@ -38,7 +37,9 @@
                                     </button>
                                 </span>
                             </div>
-                            @Html.ValidationMessage("dangnhapsai", "", new { @class = "text-danger" })
+                            <div class="col-md-10">
+                                @Html.ValidationMessage("dangnhasai", "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
 
@@ -59,8 +60,8 @@
                     </div>
                 </div>
             </div>
-
-            
+        </div>
+    </div>
 </div>
 
 <script>
