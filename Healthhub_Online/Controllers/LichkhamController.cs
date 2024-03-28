@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
+
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -90,25 +90,35 @@ namespace Healthhub_Online.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DanhGia(DanhGia danhGia)
         {
-            if (ModelState.IsValid)
+            // Check if the appointment has already been reviewed
+            bool isAlreadyReviewed = db.DanhGias.Any(d => d.IDLichKham == danhGia.IDLichKham);
+
+            if (isAlreadyReviewed)
             {
-                // Save danhGia to the database
-                db.DanhGias.Add(danhGia);
-                db.SaveChanges();
+                // If the appointment has already been reviewed, return with an error message
+                ModelState.AddModelError("", "Gửi không thành công. Bạn đã đánh giá rồi.");
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    // Save danhGia to the database
+                    db.DanhGias.Add(danhGia);
+                    db.SaveChanges();
 
-                TempData["SuccessMessage"] = "Đánh giá của bạn đã được gửi thành công.";
-
-                // Redirect to Datuvanxong action with the user's ID
-                return RedirectToAction("Datuvanxong", new { id = danhGia.IDNguoiDung });
+                    // Redirect to Datuvanxong action with the user's ID
+                    return RedirectToAction("Datuvanxong", new { id = danhGia.IDNguoiDung });
+                }
             }
 
             ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", danhGia.IDNguoiDung);
             ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "HoTen", danhGia.IDQuanTri);
             ViewBag.IDDanhGiaChatLuong = new SelectList(db.DanhGiaChatLuongs, "IDDanhGiaChatLuong", "DanhGiaChatLuong1", danhGia.IDDanhGiaChatLuong);
 
-            // If ModelState is not valid, return back to the form with validation errors
+            // Return back to the form with validation errors or "Lịch khám đã được đánh giá" message
             return View(danhGia);
         }
+
 
 
         // GET: LichKham/Benhan
@@ -133,11 +143,7 @@ namespace Healthhub_Online.Controllers
         public ActionResult DownloadFile(int id)
         {
             LichKham lichKham = db.LichKhams.Find(id);
-            if (lichKham == null || string.IsNullOrEmpty(lichKham.KetQuaKham))
-            {
-                ViewBag.Message = "File bệnh án chưa được gửi.";
-                return View("Benhan");
-            }
+           
 
             // Tạo đường dẫn đến file
             string path = Path.Combine(Server.MapPath("~/UploadedFiles"), lichKham.KetQuaKham);
@@ -204,12 +210,35 @@ namespace Healthhub_Online.Controllers
                 ModelState.AddModelError("BatDau", "Ngày bắt đầu phải lớn hơn ngày hiện tại.");
             }
 
+            // Kiểm tra nếu ngày kết thúc nhỏ hơn ngày bắt đầu
+            if (lichKham.KetThuc <= lichKham.BatDau)
+            {
+                ModelState.AddModelError("KetThuc", "Ngày kết thúc phải lớn hơn ngày bắt đầu.");
+            }
+
             // Kiểm tra nếu ngày bắt đầu trùng với ngày bắt đầu của lịch đã tạo
             var existingLichKham = db.LichKhams.FirstOrDefault(l => l.BatDau == lichKham.BatDau);
             if (existingLichKham != null)
             {
                 ModelState.AddModelError("BatDau", "Ngày này đã được tạo rồi.");
             }
+
+            // Kiểm tra khoảng cách giữa hai lịch hẹn
+            var lastLichKham = db.LichKhams
+             .Where(l => l.IDNguoiDung == lichKham.IDNguoiDung)
+             .OrderByDescending(l => l.BatDau)
+             .FirstOrDefault();
+
+            if (lastLichKham != null)
+            {
+                TimeSpan timeGap = lichKham.BatDau - lastLichKham.BatDau ?? TimeSpan.Zero;
+                if (timeGap.TotalHours < 2)
+                {
+                    ModelState.AddModelError("BatDau", "Khoảng cách giữa hai lịch hẹn phải lớn hơn 2 tiếng.");
+                }
+            }
+
+
 
             if (ModelState.IsValid)
             {
@@ -220,45 +249,53 @@ namespace Healthhub_Online.Controllers
             }
 
             ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", lichKham.IDNguoiDung);
-            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "HoTen", lichKham.IDQuanTri);
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris.Where(n => n.VaiTro == 2), "IDQuanTri", "HoTen");
             return View(lichKham);
         }
 
 
-        // GET: Lichkham/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             LichKham lichKham = db.LichKhams.Find(id);
             if (lichKham == null)
             {
                 return HttpNotFound();
             }
+
+            // Load danh sách người dùng và bác sĩ để hiển thị trong dropdownlist
             ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", lichKham.IDNguoiDung);
-            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan", lichKham.IDQuanTri);
+            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "HoTen", lichKham.IDQuanTri);
+
             return View(lichKham);
         }
 
-        // POST: Lichkham/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDLichKham,ChuDe,MoTa,BatDau,KetThuc,TrangThai,ZoomInfo,KetQuaKham,IDNguoiDung,IDQuanTri")] LichKham lichKham)
+        public ActionResult Edit(LichKham lichKham)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(lichKham).State = System.Data.Entity.EntityState.Modified;
+                // Lấy thông tin người đặt lịch và bác sĩ từ CSDL dựa trên ID được chọn từ form
+                NguoiDung nguoiDung = db.NguoiDungs.Find(lichKham.IDNguoiDung);
+                QuanTri quanTri = db.QuanTris.Find(lichKham.IDQuanTri);
+
+                // Cập nhật thông tin lịch khám với người đặt lịch và bác sĩ mới
+                lichKham.NguoiDung = nguoiDung;
+                lichKham.QuanTri = quanTri;
+                 lichKham.TrangThai = 0;
+                db.Entry(lichKham).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Dangxuly");
             }
-            ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", lichKham.IDNguoiDung);
-            ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan", lichKham.IDQuanTri);
+
             return View(lichKham);
         }
+
 
 
 
@@ -285,10 +322,39 @@ namespace Healthhub_Online.Controllers
             LichKham lichKham = db.LichKhams.Find(id);
             db.LichKhams.Remove(lichKham);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Dangxuly");
         }
 
-       
+
+        public JsonResult Lichdangluoi()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<LichKham> l = db.LichKhams.Where(ll => ll.TrangThai == 1).ToList();
+
+            var events = l.Select(ll => new
+            {
+                id = ll.IDLichKham,
+                title = ll.ChuDe,
+                start = ll.BatDau.HasValue ? ll.BatDau.Value.ToLocalTime() : (DateTime?)null, // Kiểm tra giá trị trước khi chuyển đổi
+                end = ll.KetThuc.HasValue ? ll.KetThuc.Value.ToLocalTime() : (DateTime?)null, // Kiểm tra giá trị trước khi chuyển đổi
+            });
+
+            return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+
+        public ActionResult lichhen()
+        {
+            return View();
+
+        }
+        private static DateTime ConvertFromUnixTimestamp(double timestamp)
+        {
+            var origin = new DateTime(2000, 1, 1, 0, 0, 0, 0);
+            return origin.AddSeconds(timestamp);
+        }
+
+
 
 
 

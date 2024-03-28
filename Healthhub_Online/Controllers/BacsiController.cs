@@ -139,11 +139,8 @@ namespace Healthhub_Online.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Xacnhanlichhen([Bind(Include = "IDLichKham,ChuDe,MoTa,BatDau,KetThuc,TrangThai,ZoomInfo,KetQuaKham,IDNguoiDung,IDQuanTri")] LichKham lichKham)
         {
-            // Check if the start time is before the current date
-            if (lichKham.BatDau < DateTime.Now)
-            {
-                ModelState.AddModelError("BatDau", "Thời gian bắt đầu phải lớn hơn ngày hiện tại.");
-            }
+            
+          
 
             // Check if the end time is before the start time
             if (lichKham.KetThuc < lichKham.BatDau)
@@ -417,6 +414,40 @@ namespace Healthhub_Online.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+
+
+        public JsonResult Lichdangluoi()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<LichKham> l = db.LichKhams.Where(ll => ll.TrangThai == 1).ToList();
+
+            var events = l.Select(ll => new
+            {
+                id = ll.IDLichKham,
+                title = ll.ChuDe,
+                start = ll.BatDau.HasValue ? ll.BatDau.Value.ToLocalTime() : (DateTime?)null, 
+                end = ll.KetThuc.HasValue ? ll.KetThuc.Value.ToLocalTime() : (DateTime?)null, 
+            });
+
+            return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+
+        public ActionResult Lichhenkham()
+        {
+            return View();
+
+        }
+        private static DateTime ConvertFromUnixTimestamp(double timestamp)
+        {
+            var origin = new DateTime(2000, 1, 1, 0, 0, 0, 0);
+            return origin.AddSeconds(timestamp);
+        }
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
