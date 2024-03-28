@@ -1285,11 +1285,6 @@
     <Content Include="Areas\Admin\Views\LichKhams\Create.cshtml" />
     <Content Include="Areas\Admin\Views\LichKhams\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\LichKhams\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Solieucovids\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Solieucovids\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Solieucovids\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Solieucovids\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Solieucovids\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Tintucs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Tintucs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Tintucs\Create.cshtml" />
@@ -1298,6 +1293,11 @@
     <Content Include="Areas\Admin\Views\QuanTris\Ban.cshtml" />
     <Content Include="Areas\Admin\Views\QuanTris\ListBan.cshtml" />
     <Content Include="Areas\Admin\Views\QuanTris\KiemTraDanhGia.cshtml" />
+    <Content Include="Areas\Admin\Views\Solieudichbenh\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Solieudichbenh\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Solieudichbenh\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Solieudichbenh\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Solieudichbenh\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

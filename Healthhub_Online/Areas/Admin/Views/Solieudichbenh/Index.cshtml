@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Healthhub_Online.Models.Solieucovid>
+﻿@model IEnumerable<Healthhub_Online.Models.Solieudichbenh>
 
 @{
     ViewBag.Title = "Index";
@@ -16,20 +16,18 @@
             @Html.DisplayNameFor(model => model.Quocgia)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Socanhiem)
+            @Html.DisplayNameFor(model => model.Nam)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Dangdieutri)
+            @Html.DisplayNameFor(model => model.Dichbenh)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Khoi)
+            @Html.DisplayNameFor(model => model.Canhiem)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Tuvong)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ghichu)
-        </th>
+        
         <th></th>
     </tr>
 
@@ -40,24 +38,21 @@
                 @Html.DisplayFor(modelItem => item.Quocgia)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Socanhiem)
+                @Html.DisplayFor(modelItem => item.Nam)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Dangdieutri)
+                @Html.DisplayFor(modelItem => item.Dichbenh)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Khoi)
+                @Html.DisplayFor(modelItem => item.Canhiem)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Tuvong)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Ghichu)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IDThongkecovid }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IDThongkecovid }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IDThongkecovid })
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDThongke }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDThongke }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDThongke })
             </td>
         </tr>
     }
