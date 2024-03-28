@@ -71,10 +71,8 @@
             @Html.ValidationMessageFor(model => model.IDDanhGiaChatLuong, "", new { @class = "text-danger" })
         </div>
     </div>
-    @* Hidden fields to send IDLichKham, BatDau, KetThuc to the controller *@
-    @Html.HiddenFor(model => model.IDLichKham)
-    @Html.HiddenFor(model => model.LichKham.BatDau)
-    @Html.HiddenFor(model => model.LichKham.KetThuc)
+   
+    
 
     <div class="form-group">
         <div class="col-md-offset-6 col-md-6">
