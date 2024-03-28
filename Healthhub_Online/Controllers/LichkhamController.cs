@@ -90,16 +90,8 @@ namespace Healthhub_Online.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DanhGia(DanhGia danhGia)
         {
-            // Check if the appointment has already been reviewed
-            bool isAlreadyReviewed = db.DanhGias.Any(d => d.IDLichKham == danhGia.IDLichKham);
-
-            if (isAlreadyReviewed)
-            {
-                // If the appointment has already been reviewed, return with an error message
-                ModelState.AddModelError("", "Gửi không thành công. Bạn đã đánh giá rồi.");
-            }
-            else
-            {
+           
+           
                 if (ModelState.IsValid)
                 {
                     // Save danhGia to the database
@@ -109,7 +101,7 @@ namespace Healthhub_Online.Controllers
                     // Redirect to Datuvanxong action with the user's ID
                     return RedirectToAction("Datuvanxong", new { id = danhGia.IDNguoiDung });
                 }
-            }
+            
 
             ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", danhGia.IDNguoiDung);
             ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "HoTen", danhGia.IDQuanTri);
