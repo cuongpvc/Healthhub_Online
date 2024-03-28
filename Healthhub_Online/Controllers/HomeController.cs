@@ -173,26 +173,33 @@ namespace Healthhub_Online.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Dangnhap(string username, string password)
         {
+            
             var nguoiDung = db.NguoiDungs.FirstOrDefault(u => u.TaiKhoan == username.Trim() && u.MatKhau == password);
             var quanTri = db.QuanTris.FirstOrDefault(u => u.TaiKhoan == username.Trim() && u.MatKhau == password);
+            
             if (nguoiDung != null)
             {
 
                 Session["user"] = nguoiDung;
                 return RedirectToAction("Details", "Nguoidung", new { id = nguoiDung.IDNguoiDung });
             }
-            else if (quanTri != null)
+            else if (quanTri != null )
             {
                 if (quanTri.VaiTro == 1)
                 {
                     Session["admin"] = quanTri;
                     return RedirectToAction("QuanTris", "Admin");
                 }
-                else
+                else if ((quanTri.VaiTro == 2) && (quanTri.TrangThai == true))
                 {
                     Session["userBS"] = quanTri;
                     return RedirectToAction("Index", "Home");
 
+                }
+                else
+                {
+                    TempData["StatusMessage"] = "Tài Khoản Đã Bị Ban";
+                    return View();
                 }
                
             }

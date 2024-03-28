@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Healthhub_Online.Models;
+using PagedList;
 
 namespace Healthhub_Online.Areas.Admin.Controllers
 {
@@ -21,7 +22,11 @@ namespace Healthhub_Online.Areas.Admin.Controllers
             var quanTris = db.QuanTris.Include(q => q.Khoa);
             return View(quanTris.ToList());
         }
-
+        public ActionResult ListBan()
+        {
+            var quanTris = db.QuanTris.Where(q => q.TrangThai == false).ToList();
+            return View(quanTris);
+        }
         // GET: Admin/QuanTris/Details/5
         public ActionResult Details(int? id)
         {
@@ -95,8 +100,8 @@ namespace Healthhub_Online.Areas.Admin.Controllers
             return View(quanTri);
         }
 
-        // GET: Admin/QuanTris/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Admin/QuanTris/Ban/5
+        public ActionResult Ban(int? id)
         {
             if (id == null)
             {
@@ -107,19 +112,43 @@ namespace Healthhub_Online.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(quanTri);
+            else
+            {
+                quanTri.TrangThai = !quanTri.TrangThai;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            
         }
 
-        // POST: Admin/QuanTris/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult UnBan(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             QuanTri quanTri = db.QuanTris.Find(id);
-            db.QuanTris.Remove(quanTri);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (quanTri == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                quanTri.TrangThai = !quanTri.TrangThai;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
+        public ActionResult KiemTraDanhGia(int? page)
+        {
+            var danhgia = db.DanhGias.OrderBy(x => x.IDDanhGia).ThenBy(y => y.IDDanhGiaChatLuong).ToList();
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(danhgia.ToPagedList(pageNumber, pageSize));
+        }
+
+
+
 
         protected override void Dispose(bool disposing)
         {

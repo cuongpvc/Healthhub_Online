@@ -43,6 +43,8 @@ namespace Healthhub_Online.Models
         [StringLength(100)]
         public string ThongtinZoom { get; set; }
 
+        public bool TrangThai { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhGia> DanhGias { get; set; }
 

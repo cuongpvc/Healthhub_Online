@@ -1,0 +1,74 @@
+﻿@model PagedList.IPagedList<Healthhub_Online.Models.DanhGia>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Kiemtralichhen";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<hr />
+<h2>Đánh Giá Của Bệnh Nhân</h2>
+<hr />
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Người đặt lịch
+        </th>
+        <th>
+            Ngày Bắt Đầu
+        </th>
+        <th>
+            Ngày Kết Thúc
+        </th>
+        @*<th>
+            Bác sĩ tư vấn
+        </th>*@
+        <th>
+            Nội Dung
+        </th>
+
+        <th>
+            Đánh giá
+        </th>
+        @*<th>
+            Kết thúc lúc
+        </th>*@
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NguoiDung.HoTen)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.QuanTri.TaiKhoan)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.LichKham.BatDau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LichKham.KetThuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDung)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DanhGiaChatLuong.DanhGiaChatLuong1)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.KetThuc)
+        </td>*@
+
+
+        </tr>
+    }
+</table>
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("KiemTraDanhGia",
+        new { page }))

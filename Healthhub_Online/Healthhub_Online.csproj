@@ -159,9 +159,8 @@
     <Compile Include="Areas\Admin\Controllers\LichKhamsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NguoiDungsController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanTrisController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SolieucovidsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SolieudichbenhController.cs" />
     <Compile Include="Areas\Admin\Controllers\TintucsController.cs" />
-    <Compile Include="Areas\Admin\Controllers\TrungTamGanNhatsController.cs" />
     <Compile Include="Controllers\BacsiController.cs" />
     <Compile Include="Controllers\HoidapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -171,7 +170,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BenhAn.cs" />
     <Compile Include="Models\DanhGia.cs" />
     <Compile Include="Models\DanhGiaChatLuong.cs" />
     <Compile Include="Models\GioiTinh.cs" />
@@ -181,10 +179,9 @@
     <Compile Include="Models\ModelWeb.cs" />
     <Compile Include="Models\NguoiDung.cs" />
     <Compile Include="Models\QuanTri.cs" />
-    <Compile Include="Models\Solieucovid.cs" />
+    <Compile Include="Models\Solieudichbenh.cs" />
     <Compile Include="Models\TinhThanh.cs" />
     <Compile Include="Models\Tintuc.cs" />
-    <Compile Include="Models\TrungTamGanNhat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1267,7 +1264,6 @@
     <Content Include="Areas\Admin\Views\QuanTris\Details.cshtml" />
     <Content Include="Areas\Admin\Views\QuanTris\Create.cshtml" />
     <Content Include="Areas\Admin\Views\QuanTris\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanTris\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDungs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDungs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDungs\Create.cshtml" />
@@ -1299,11 +1295,9 @@
     <Content Include="Areas\Admin\Views\Tintucs\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Tintucs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Tintucs\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\TrungTamGanNhats\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\TrungTamGanNhats\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\TrungTamGanNhats\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\TrungTamGanNhats\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\TrungTamGanNhats\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanTris\Ban.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanTris\ListBan.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanTris\KiemTraDanhGia.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
