@@ -29,7 +29,10 @@ namespace Healthhub_Online.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuanTri quanTri = db.QuanTris.Find(id);
+            var feedback = db.DanhGias.AsQueryable();
+            QuanTri quanTri = db.QuanTris.Include(d => d.Khoa).SingleOrDefault(d => d.IDQuanTri == id);
+            feedback = db.DanhGias.Include(f => f.DanhGiaChatLuong).Where(f => f.IDQuanTri == id);
+            ViewBag.Feedback = feedback.ToList();
             if (quanTri == null)
             {
                 return HttpNotFound();
