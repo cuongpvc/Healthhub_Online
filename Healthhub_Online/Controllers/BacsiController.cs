@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -23,20 +24,30 @@ namespace Healthhub_Online.Controllers
         }
 
         // GET: Bacsi/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int pageNumber = 1, int pageSize = 5)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var feedback = db.DanhGias.AsQueryable();
+
             QuanTri quanTri = db.QuanTris.Include(d => d.Khoa).SingleOrDefault(d => d.IDQuanTri == id);
-            feedback = db.DanhGias.Include(f => f.DanhGiaChatLuong).Where(f => f.IDQuanTri == id);
-            ViewBag.Feedback = feedback.ToList();
             if (quanTri == null)
             {
                 return HttpNotFound();
             }
+
+            var feedbackQuery = db.DanhGias.Include(f => f.DanhGiaChatLuong)
+                                            .Where(f => f.IDQuanTri == id);
+
+            ViewBag.TotalCount = feedbackQuery.Count();
+
+            var feedback = feedbackQuery.OrderBy(f=>f.IDDanhGia).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            ViewBag.Feedback = feedback;
+
+            ViewBag.PageNumber = pageNumber;
+            ViewBag.PageSize = pageSize;
+
             return View(quanTri);
         }
         // GET: Bacsi/Edit/5

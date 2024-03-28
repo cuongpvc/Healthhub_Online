@@ -42,6 +42,7 @@
 
         public int? IDTinh { get; set; }
 
+        [RegularExpression(@"^(A|B|AB|O)", ErrorMessage = "Nhóm máu không phù hợp")]
         public string NhomMau { get; set; }
 
         public string ThongTinKhac { get; set; }
