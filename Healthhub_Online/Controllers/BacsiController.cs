@@ -247,6 +247,7 @@ namespace Healthhub_Online.Controllers
         }
 
 
+
         // GET: Hoidap/Details/5
         public ActionResult DetailsHoiDap(int? id)
         {
@@ -307,6 +308,31 @@ namespace Healthhub_Online.Controllers
             ViewBag.IDNguoiDung = new SelectList(db.NguoiDungs, "IDNguoiDung", "HoTen", hoiDap.IDNguoiDung);
             ViewBag.IDQuanTri = new SelectList(db.QuanTris, "IDQuanTri", "TaiKhoan", hoiDap.IDQuanTri);
             return View(hoiDap);
+        }
+
+
+        public ActionResult Quanlyhoidap(string questionStatus, int? page)
+        {
+            if (page == null) page = 1;
+
+            IQueryable<HoiDap> hoiDapsQuery = db.HoiDaps.Include(h => h.NguoiDung).Include(h => h.QuanTri);
+
+            if (!string.IsNullOrEmpty(questionStatus))
+            {
+                int status = int.Parse(questionStatus);
+                if (status != 2)
+                    hoiDapsQuery = hoiDapsQuery.Where(n => n.TrangThai == status);
+            }
+
+
+            var hoiDaps = hoiDapsQuery.OrderByDescending(a => a.NgayGui).ThenBy(a => a.IDHoidap).ToList();
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.questionStatus = questionStatus;
+
+            return View(hoiDaps.ToPagedList(pageNumber, pageSize));
         }
 
         // POST: Hoidap/Edit/5
