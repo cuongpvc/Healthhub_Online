@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Healthhub_Online.Models;
@@ -67,32 +68,69 @@ namespace Healthhub_Online.Controllers
                     return View(nguoiDung);
                 }
 
-                if (db.NguoiDungs.Any(u => u.TaiKhoan == nguoiDung.TaiKhoan.ToLower().Trim()))
+                // Kiểm tra tính hợp lệ của email
+                if (!IsValidEmail(nguoiDung.Email))
                 {
-                    ModelState.AddModelError("TaiKhoan", "Tên đăng nhập đã tồn tại.");
-                    var gioiTinhs = db.GioiTinhs.ToList();
-                    var tinhThanhs = db.TinhThanhs.ToList();
-
-                    // Truyền danh sách giới tính và danh sách tỉnh đến view
-                    ViewBag.GioiTinhs = new SelectList(gioiTinhs, "IDGioiTinh", "GioiTinh1");
-                    ViewBag.TinhThanhs = new SelectList(tinhThanhs, "IDTinh", "TenTinh");
-                    return View(nguoiDung);
-                }
-                Random random = new Random();
-                int otp = random.Next(100000, 999999);
-                if (SendOTP(nguoiDung.Email, otp))
-                {
-                    TempData["OTP"] = otp;
-                    TempData["NguoiDung"] = nguoiDung;
-                    return RedirectToAction("VerifyOTP", "Home");
+                    ModelState.AddModelError("Email", "Địa chỉ email không hợp lệ.");
                 }
 
+                // Kiểm tra tính hợp lệ của số điện thoại
+                if (!IsValidPhoneNumber(nguoiDung.DienThoai))
+                {
+                    ModelState.AddModelError("DienThoai", "Số điện thoại không hợp lệ.");
+                }
 
+                if (ModelState.IsValid)
+                {
+                    if (db.NguoiDungs.Any(u => u.TaiKhoan == nguoiDung.TaiKhoan.ToLower().Trim()))
+                    {
+                        ModelState.AddModelError("TaiKhoan", "Tên đăng nhập đã tồn tại.");
+                        var gioiTinhs = db.GioiTinhs.ToList();
+                        var tinhThanhs = db.TinhThanhs.ToList();
 
+                        // Truyền danh sách giới tính và danh sách tỉnh đến view
+                        ViewBag.GioiTinhs = new SelectList(gioiTinhs, "IDGioiTinh", "GioiTinh1");
+                        ViewBag.TinhThanhs = new SelectList(tinhThanhs, "IDTinh", "TenTinh");
+                        return View(nguoiDung);
+                    }
+                    Random random = new Random();
+                    int otp = random.Next(100000, 999999);
+                    if (SendOTP(nguoiDung.Email, otp))
+                    {
+                        TempData["OTP"] = otp;
+                        TempData["NguoiDung"] = nguoiDung;
+                        return RedirectToAction("VerifyOTP", "Home");
+                    }
+                }
             }
 
             // Nếu model không hợp lệ, trả về view với model
+            var gioiTinhsInvalid = db.GioiTinhs.ToList();
+            var tinhThanhsInvalid = db.TinhThanhs.ToList();
+            ViewBag.GioiTinhs = new SelectList(gioiTinhsInvalid, "IDGioiTinh", "GioiTinh1");
+            ViewBag.TinhThanhs = new SelectList(tinhThanhsInvalid, "IDTinh", "TenTinh");
             return View(nguoiDung);
+        }
+
+        // Hàm kiểm tra tính hợp lệ của email
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        // Hàm kiểm tra tính hợp lệ của số điện thoại
+        private bool IsValidPhoneNumber(string phoneNumber)
+        {
+            // Số điện thoại phải là số và có độ dài từ 10 đến 11 ký tự
+            return Regex.IsMatch(phoneNumber, @"^\d{10,11}$");
         }
 
         [HttpPost]
