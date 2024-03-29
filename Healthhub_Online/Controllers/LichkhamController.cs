@@ -190,10 +190,10 @@ namespace Healthhub_Online.Controllers
                 ModelState.AddModelError("ChuDe", "Chủ đề không được để trống.");
             }
 
-            // Kiểm tra nếu chủ đề chứa ký tự đặc biệt hoặc số
-            if (!string.IsNullOrEmpty(lichKham.ChuDe) && (lichKham.ChuDe.Any(char.IsSymbol) || lichKham.ChuDe.Any(char.IsDigit)))
+            // Kiểm tra nếu chủ đề chứa ký tự đặc biệt
+            if (!string.IsNullOrEmpty(lichKham.ChuDe) && (lichKham.ChuDe.Any(char.IsSymbol) ))  //|| lichKham.ChuDe.Any(char.IsDigit)
             {
-                ModelState.AddModelError("ChuDe", "Chủ đề không được chứa ký tự đặc biệt hoặc số.");
+                ModelState.AddModelError("ChuDe", "Chủ đề không được chứa ký tự đặc biệt.");
             }
 
             // Kiểm tra nếu ngày bắt đầu nhỏ hơn ngày hiện tại
@@ -202,33 +202,34 @@ namespace Healthhub_Online.Controllers
                 ModelState.AddModelError("BatDau", "Ngày bắt đầu phải lớn hơn ngày hiện tại.");
             }
 
+            // Kiểm tra nếu ngày bắt đầu null
+            if (lichKham.BatDau == null)
+            {
+                ModelState.AddModelError("BatDau", "Vui lòng chọn ngày bắt đầu.");
+            }
             // Kiểm tra nếu ngày kết thúc nhỏ hơn ngày bắt đầu
             if (lichKham.KetThuc <= lichKham.BatDau)
             {
                 ModelState.AddModelError("KetThuc", "Ngày kết thúc phải lớn hơn ngày bắt đầu.");
             }
 
-            // Kiểm tra nếu ngày bắt đầu trùng với ngày bắt đầu của lịch đã tạo
-            var existingLichKham = db.LichKhams.FirstOrDefault(l => l.BatDau == lichKham.BatDau);
-            if (existingLichKham != null)
-            {
-                ModelState.AddModelError("BatDau", "Ngày này đã được tạo rồi.");
-            }
+
 
             // Kiểm tra khoảng cách giữa hai lịch hẹn
-            var lastLichKham = db.LichKhams
-             .Where(l => l.IDNguoiDung == lichKham.IDNguoiDung)
-             .OrderByDescending(l => l.BatDau)
-             .FirstOrDefault();
+            var lastConfirmedLichKham = db.LichKhams
+               .Where(l => l.IDNguoiDung == lichKham.IDNguoiDung && l.TrangThai == 1)
+               .OrderByDescending(l => l.BatDau)
+               .FirstOrDefault();
 
-            if (lastLichKham != null)
+            if (lastConfirmedLichKham != null)
             {
-                TimeSpan timeGap = lichKham.BatDau - lastLichKham.BatDau ?? TimeSpan.Zero;
+                TimeSpan timeGap = lichKham.BatDau - lastConfirmedLichKham.BatDau ?? TimeSpan.Zero;
                 if (timeGap.TotalHours < 2)
                 {
                     ModelState.AddModelError("BatDau", "Khoảng cách giữa hai lịch hẹn phải lớn hơn 2 tiếng.");
                 }
             }
+
 
 
 

@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Healthhub_Online.Models;
@@ -148,17 +149,21 @@ namespace Healthhub_Online.Controllers
                 ModelState.AddModelError("KetThuc", "Thời gian kết thúc phải lớn hơn thời gian bắt đầu.");
             }
 
-            if (ModelState.IsValid)
-            {
-                db.Entry(lichKham).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Lichdaxacnhan", "Bacsi");
-            }
+           
 
             // Check if ZoomInfo is empty
             if (string.IsNullOrWhiteSpace(lichKham.ZoomInfo))
             {
                 ModelState.AddModelError("ZoomInfo", "Vui lòng nhập link Zoom.");
+            }
+            else
+            {
+                // Check if ZoomInfo is a valid Zoom link format
+                string zoomLinkPattern = @"^https?:\/\/(?:www\.)?zoom\.us\/[a-zA-Z0-9\-_]+(\?[\w=&]*)?$";
+                if (!Regex.IsMatch(lichKham.ZoomInfo, zoomLinkPattern))
+                {
+                    ModelState.AddModelError("ZoomInfo", "Định dạng link Zoom không đúng. Vui lòng nhập lại.");
+                }
             }
 
             if (ModelState.IsValid)
