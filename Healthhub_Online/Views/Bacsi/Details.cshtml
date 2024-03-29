@@ -3,15 +3,20 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int pageNumber = ViewBag.PageNumber;
+    int pageSize = ViewBag.PageSize;
+    int totalCount = ViewBag.TotalCount;
+    int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 }
+
 @{
     var userBS = Session["userBS"] as Healthhub_Online.Models.QuanTri;
 }
+
 <h2>Hồ sơ cá nhân</h2>
 <br />
-<div class="">
+<div class="profile">
     <div class="col-md-6">
-
         <img class="imgavt" src=@Model.AnhBia width="170" height="170" />
         &nbsp;
         <div class="divInfo">
@@ -19,41 +24,53 @@
             <br />
             Khoa: @Html.DisplayFor(model => model.Khoa.TenKhoa)
             <br />
-
             Trình độ : @Html.DisplayFor(model => model.TrinhDo)
-
-
         </div>
     </div>
-
-
 </div>
 <br />
-<h4>Đánh giá từ người dùng</h4>
-<hr />  
-@if (ViewBag.Feedback != null && ViewBag.Feedback.Count > 0)
-{
-    <ul>
-        @foreach (var feedback in ViewBag.Feedback)
-        {
-            <li>
-                <strong>@feedback.DanhGiaChatLuong.DanhGiaChatLuong1:</strong> @feedback.NoiDung
-                <br />
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p>@Model.HoTen chưa có đánh giá</p>
-}
-</div>
-@{
-    if (userBS != null)
+
+<section id="feedbackSection">
+    <h4>Đánh giá từ người dùng</h4>
+    <hr />
+    @if (ViewBag.Feedback != null && ViewBag.Feedback.Count > 0)
     {
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.IDQuanTri }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>
+        <ul>
+            @foreach (var feedback in ViewBag.Feedback)
+            {
+                <li>
+                    <strong>@feedback.DanhGiaChatLuong.DanhGiaChatLuong1:</strong> @feedback.NoiDung
+                    <br />
+                </li>
+            }
+        </ul>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                @if (pageNumber > 1)
+                {
+                    <li class="page-item">
+                        @Html.ActionLink("Trước", "Details", new { id = Model.IDQuanTri, pageNumber = pageNumber - 1, pageSize = pageSize }, new { @class = "page-link" })
+                    </li>
+                }
+                @if (pageNumber < totalPages)
+                {
+                    <li class="page-item">
+                        @Html.ActionLink("Sau", "Details", new { id = Model.IDQuanTri, pageNumber = pageNumber + 1, pageSize = pageSize }, new { @class = "page-link" })
+                    </li>
+                }
+            </ul>
+        </nav>
     }
+    else
+    {
+        <p>@Model.HoTen chưa có đánh giá</p>
+    }
+</section>
+
+@if (userBS != null)
+{
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 }
