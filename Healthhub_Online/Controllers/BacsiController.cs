@@ -165,17 +165,19 @@ namespace Healthhub_Online.Controllers
             // Check if ZoomInfo is empty
             if (string.IsNullOrWhiteSpace(lichKham.ZoomInfo))
             {
-                ModelState.AddModelError("ZoomInfo", "Vui lòng nhập link Zoom.");
+                ModelState.AddModelError("ZoomInfo", "Vui lòng nhập link rooms.");
             }
             else
             {
-                // Check if ZoomInfo is a valid Zoom link format
-                string zoomLinkPattern = @"^https?:\/\/(?:www\.)?zoom\.us\/[a-zA-Z0-9\-_]+(\?[\w=&]*)?$";
-                if (!Regex.IsMatch(lichKham.ZoomInfo, zoomLinkPattern))
+                string googleMeetLinkPattern = @"^https?:\/\/meet\.google\.com\/[a-zA-Z0-9\-_]+(\?[\w=&]*)?$";
+
+                // Check if ZoomInfo is a valid Google Meet link format
+                if (!Regex.IsMatch(lichKham.ZoomInfo, googleMeetLinkPattern))
                 {
-                    ModelState.AddModelError("ZoomInfo", "Định dạng link Zoom không đúng. Vui lòng nhập lại.");
+                    ModelState.AddModelError("ZoomInfo", "Định dạng link Google Meet không đúng. Vui lòng nhập lại.");
                 }
             }
+
 
             if (ModelState.IsValid)
             {
